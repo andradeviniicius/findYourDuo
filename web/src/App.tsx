@@ -1,11 +1,7 @@
-import "./global.css";
-import { Logo, Heading } from "./components";
-
 function App() {
   return (
     <>
-      <Logo />
-      <Heading title="Seu duo está aqui" />
+    <h1>Hello world</h1>
     </>
   );
 }
