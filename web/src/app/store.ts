@@ -1,10 +1,10 @@
 import { configureStore } from '@reduxjs/toolkit'
-import postAdModalSlice from '../features/modal/postAdModalSlice'
+import createAdModalSlice from '../features/modal/createAdModalSlice'
 // ...
 
 export const store = configureStore({
   reducer: {
-    modal: postAdModalSlice
+    modal: createAdModalSlice
   }
 })
 

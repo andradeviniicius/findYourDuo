@@ -9,8 +9,8 @@ const initialState: initialState = {
   active: false,
 };
 
-export const postAdModalSlice = createSlice({
-  name: "postAdModal",
+export const createAdModalSlice = createSlice({
+  name: "createAdModal",
   initialState,
   reducers: {
     openModal: (state) => {
@@ -22,5 +22,5 @@ export const postAdModalSlice = createSlice({
   },
 });
 
-export const { openModal, closeModal } = postAdModalSlice.actions;
-export default postAdModalSlice.reducer;
+export const { openModal, closeModal } = createAdModalSlice.actions;
+export default createAdModalSlice.reducer;
