@@ -11,9 +11,7 @@ export function Background({ children }: Props) {
   return (
     <ImageBackground
       source={backgroundImg}
-      // source pressupoe um novo valor entao ele sempre vai procurar essa imagem de novo
       defaultSource={backgroundImg}
-      // memoriza a imagem padrao e acelera o carregamento dela
       style={styles.container}
     >
       {children}
