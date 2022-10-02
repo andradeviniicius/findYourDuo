@@ -1,6 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
 generator client {
   provider = "prisma-client-js"
 }
@@ -10,25 +7,18 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Game {
-  id        String @id @map("_id")
-  title     String
-  bannerUrl String
-
-  ads Ad[]
+model ads {
+  id      String  @id @default(auto()) @map("_id") @db.ObjectId
+  gameId  String  @db.ObjectId
+  title   String
+  gamesId String? @db.ObjectId
+  games   games?  @relation(fields: [gamesId], references: [id])
 }
 
-model Ad {
-  id              String   @id @map("_id")
-  gameId          String
-  name            String
-  yearsPlaying    Int
-  discord         String
-  weekDays        String
-  hoursStart      Int
-  HoursEnd        Int
-  useVoiceChannel Boolean
-  createdAt       DateTime @default(now())
+model games {
+  id        String @id @default(auto()) @map("_id") @db.ObjectId
+  bannerUrl String
+  title     String
 
-  game Game @relation(fields: [gameId], references: [id])
+  ad ads[]
 }
