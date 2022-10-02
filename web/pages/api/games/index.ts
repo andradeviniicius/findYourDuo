@@ -1,10 +1,25 @@
+import { PrismaClient } from "@prisma/client";
+
 import convertHourStringToMinutes from "../utils/convertHourStringToMinutes";
 import convertMinutesToHourString from "../utils/convertMinuteStringToHours";
-
+const prisma = new PrismaClient();
 
 export default function handler(req: any, res: any) {
-  // buscar games no mongodb
-  res.json("games");
+  async function main() {
+    await prisma.$connect();
+    const games = await prisma.games.findMany();
+    res.json(games);
+  }
+
+  main()
+    .then(async () => {
+      await prisma.$disconnect();
+    })
+    .catch(async (e) => {
+      console.error(e);
+      await prisma.$disconnect();
+      process.exit(1);
+    });
 }
 
 // export default async function games/:id/ads(req, res) {
