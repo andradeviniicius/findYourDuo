@@ -6,6 +6,26 @@ input[type="time"]::-webkit-calendar-picker-indicator {
   filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(196deg)
     brightness(102%) contrast(103%);
 }
+.weekDays-selector input {
+  display: none!important;
+}
+
+.weekDays-selector input[type=checkbox] + label {
+  display: inline-block;
+  border-radius: 6px;
+  background: #18181B;
+  height: 40px;
+  width: 40px;
+  margin-right: 4px;
+  line-height: 40px;
+  text-align: center;
+  cursor: pointer;
+}
+
+.weekDays-selector input[type=checkbox]:checked + label {
+  background: #A855F7;
+  color: #ffffff;
+}
 
 body {
   width: 100%;
