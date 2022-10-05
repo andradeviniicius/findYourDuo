@@ -3,9 +3,9 @@ import "../styles/globals.css";
 import clientPromise from "../lib/mongodb";
 import { InferGetServerSidePropsType } from "next";
 
-import { MainTitle, CreateGame, GameList } from "../src/components";
 import { Provider } from "react-redux";
 import { store } from "../src/app/store";
+import Home from ".";
 
 export async function getServerSideProps(context: any) {
   try {
@@ -35,11 +35,7 @@ export default function MyApp({
 }: InferGetServerSidePropsType<typeof getServerSideProps>) {
   return (
     <Provider store={store}>
-      <div className="max-w-[1344px] mx-auto flex flex-col items-center m-20">
-        <MainTitle />
-        <GameList />
-        <CreateGame />
-      </div>
+      <Home />
     </Provider>
   );
 }
