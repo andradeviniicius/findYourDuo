@@ -1,37 +1,24 @@
 import { MainTitle, CreateGame, GameList } from "../src/components";
 
-export async function getServerSideProps(context: any) {
-  try {
-    // await clientPromise;
-    // `await clientPromise` will use the default database passed in the MONGODB_URI
-    // However you can use another database (e.g. myDatabase) by replacing the `await clientPromise` with the following code:
-    //
-    // const client = await clientPromise
-    // const db = client.db("myDatabase")
-    //
-    // Then you can execute queries against your database like so:
-    // db.find({})
+export async function getServerSideProps() {
+  const res = await fetch("https://api.twitch.tv/helix/games/top", {
+    headers: {
+      Authorization: `Bearer ${process.env.TWITCH_SECRET}`,
+      "Client-Id": `${process.env.TWITCH_CLIENT_ID}`,
+    },
+  });
+  const data = await res.json();
 
-    return {
-      props: { isConnected: true },
-    };
-  } catch (e) {
-    console.error(e);
-    return {
-      props: { isConnected: false },
-    };
-  }
+  return { props: { data } };
 }
 
-const Home = () => {
+const Home = (props: any) => {
   return (
-    <>
-      <div className="max-w-[1344px] mx-auto flex flex-col items-center m-20">
-        <MainTitle />
-        <GameList />
-        <CreateGame />
-      </div>
-    </>
+    <div className="max-w-[1344px] mx-auto flex flex-col items-center m-20">
+      <MainTitle />
+      <GameList twitchTopGames={props.data} />
+      <CreateGame />
+    </div>
   );
 };
 export default Home;
