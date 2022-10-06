@@ -1,41 +1,25 @@
+import Head from "next/head";
+import type { AppProps } from "next/app";
+
 import "../styles/globals.css";
-
-import clientPromise from "../lib/mongodb";
-import { InferGetServerSidePropsType } from "next";
-
 import { Provider } from "react-redux";
 import { store } from "../src/app/store";
-import Home from ".";
 
-export async function getServerSideProps(context: any) {
-  try {
-    await clientPromise;
-    // `await clientPromise` will use the default database passed in the MONGODB_URI
-    // However you can use another database (e.g. myDatabase) by replacing the `await clientPromise` with the following code:
-    //
-    // const client = await clientPromise
-    // const db = client.db("myDatabase")
-    //
-    // Then you can execute queries against your database like so:
-    // db.find({})
-
-    return {
-      props: { isConnected: true },
-    };
-  } catch (e) {
-    console.error(e);
-    return {
-      props: { isConnected: false },
-    };
-  }
-}
-
-export default function MyApp({
-  isConnected,
-}: InferGetServerSidePropsType<typeof getServerSideProps>) {
+function MyApp({ Component, pageProps }: AppProps) {
   return (
     <Provider store={store}>
-      <Home />
+      <Head>
+        <title>NLW eSportss</title>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" />
+        <link
+          href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+          rel="stylesheet"
+        />
+      </Head>
+      <Component {...pageProps} />
     </Provider>
   );
 }
+
+export default MyApp;
