@@ -18,11 +18,8 @@ export default function GameCard({
     <div
       className="carousel-item text-center relative w-[180] h-60 snap-start"
     >
-      <div
-        className="h-full w-full aspect-[3/4] block bg-origin-padding bg-left-top bg-cover bg-no-repeat z-0 "
-      >
         <Link href={`/games/${gameId}`}>
-          <a>
+          <a className="h-full w-full aspect-[3/4] block bg-origin-padding bg-left-top bg-cover bg-no-repeat z-0 ">
             <Image
               src={gameBanner.replace("{width}x{height}", "180x240")}
               width={180}
@@ -40,7 +37,6 @@ export default function GameCard({
             </div>
           </a>
         </Link>
-      </div>
     </div>
   );
 }

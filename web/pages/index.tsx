@@ -14,7 +14,7 @@ export async function getServerSideProps() {
 
 const Home = (props: any) => {
   return (
-    <div className="max-w-[1344px] mx-auto flex flex-col items-center m-20">
+    <div className="flex flex-col 2xl:container 2xl:mx-auto 2xl:px-0 py-3">
       <MainTitle />
       <GameList twitchTopGames={props.data} />
       <CreateGame />
