@@ -31,23 +31,25 @@ Em desenvolvimento, qualquer contribuição será bem-vinda :)
 - Agora basta acessar `localhost:3000`
 
 ### Tecnologias utilizadas
+✅ Implementado
+❌ Removido
+🚧 Em progresso
 
 | Durante o evento: | Atualmente:          |
 | ----------------- | -------------------- |
 | React             | ✅ React             |
-| React Native      | ✅ React Native      |
+| React Native      | 🚧 React Native      |
 | TailwindCSS       | ✅ TailwindCSS       |
-| Prisma            | ✅ Radix             |
-| SQLite            | ✅ React-hook-form   |
+| Prisma            | 🚧 Radix             |
+| SQLite            | 🚧 React-hook-form   |
 | TypeScript        | ✅ TypeScript        |
 |                   | ✅ Prisma            |
 |                   | ❌SQLite             |
-|                   | ✅ MongoDB           |
+|                   | 🚧 MongoDB           |
 |                   | ✅ NextJS            |
-|                   | ✅ NextJS API Routes |
 |                   | ✅ Redux RTK         |
-|                   | ✅ Twitch API        |
-|                   | ✅ IGDB API          |
+|                   | 🚧 Twitch API        |
+|                   | 🚧 IGDB API          |
 
 
 ##### Autoria
