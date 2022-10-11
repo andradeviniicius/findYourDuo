@@ -1,6 +1,6 @@
 # 🎮findYourDuo
 
-##### O findYourDuo é uma aplicação web desenvolvida durante o evento NLW eSports na trilha Ignite da [@RocketSeat](https://www.rocketseat.com.br/).
+O findYourDuo é uma aplicação web desenvolvida durante o evento NLW eSports na trilha Ignite da [@RocketSeat](https://www.rocketseat.com.br/) e dado continuidade por mim pós evento
 
 ### Seções:
 
