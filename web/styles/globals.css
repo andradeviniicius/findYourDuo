@@ -7,13 +7,13 @@ input[type="time"]::-webkit-calendar-picker-indicator {
     brightness(102%) contrast(103%);
 }
 .weekDays-selector input {
-  display: none!important;
+  display: none !important;
 }
 
-.weekDays-selector input[type=checkbox] + label {
+.weekDays-selector input[type="checkbox"] + label {
   display: inline-block;
   border-radius: 6px;
-  background: #18181B;
+  background: #18181b;
   height: 40px;
   width: 40px;
   margin-right: 4px;
@@ -22,8 +22,8 @@ input[type="time"]::-webkit-calendar-picker-indicator {
   cursor: pointer;
 }
 
-.weekDays-selector input[type=checkbox]:checked + label {
-  background: #A855F7;
+.weekDays-selector input[type="checkbox"]:checked + label {
+  background: #a855f7;
   color: #ffffff;
 }
 
@@ -31,7 +31,7 @@ body {
   width: 100%;
   height: 100%;
   background: #121214;
-  background-image: url('../src/assets/Fundo.svg');
+  background-image: url("../src/assets/Fundo.svg");
   background-size: cover;
   background-repeat: no-repeat;
 
@@ -43,4 +43,58 @@ body {
 
 #__next {
   width: 90%;
+}
+
+#globalLoader {
+  position: fixed;
+  z-index: 1700;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #121214;
+  display: flex;
+  width: 100%;
+  height: 100%;
+  justify-content: center;
+  align-items: center;
+}
+.loader {
+  --clr: #673ab7;
+  /* color of spining  */
+  width: 50px;
+  height: 50px;
+  position: relative;
+}
+.loader div:nth-child(1),
+.loader div:nth-child(2) {
+  content: "";
+  position: absolute;
+  top: -10px;
+  left: -10px;
+  width: 100%;
+  height: 100%;
+  border-radius: 100%;
+  border: 10px solid transparent;
+  border-top-color: var(--clr);
+}
+.loader div:nth-child(1) {
+  z-index: 100;
+  animation: spin 1s infinite;
+}
+.loader div:nth-child(2) {
+  border: 10px solid #ccc;
+}
+@keyframes spin {
+  0% {
+    -webkit-transform: rotate(0deg);
+    -ms-transform: rotate(0deg);
+    -o-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+    -ms-transform: rotate(360deg);
+    -o-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
 }
