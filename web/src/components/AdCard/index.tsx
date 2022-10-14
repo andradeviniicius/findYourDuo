@@ -1,16 +1,17 @@
 import { GameController } from "phosphor-react";
 
+import { motion } from "framer-motion";
+
 import transformArrayInDaysAweek from "../../utils/transformArrayInDaysAweek";
 import convertMinutesToHourString from "../../../pages/api/utils/convertMinuteStringToHours";
-import DaysOfWeek from "../Input/DaysOfWeek";
 
 type Props = {
   adId: Number;
   userName: String;
   timePlaying: Number;
-  daysOfWeek: number[] | undefined;
-  hourStart: number | number[];
-  hourEnd: number | number[];
+  daysOfWeek: number[];
+  hourStart: number;
+  hourEnd: number;
   voiceCall: boolean;
 };
 
@@ -24,7 +25,7 @@ export default function AdCard({
   voiceCall,
 }: Props) {
   return (
-    <div className="carousel-item relative w-72 snap-start        text-white">
+    <motion.div className="carousel-item relative w-72 snap-start        text-white">
       <div className="h-full w-full aspect-[3/4] block bg-origin-padding bg-left-top bg-cover bg-no-repeat z-0 ">
         <div className="w-72 h-fit mx-auto ">
           <div className="border-0 rounded-lg relative flex flex-col w-auto bg-[#2A2634] outline-none focus:outline-none">
@@ -47,7 +48,7 @@ export default function AdCard({
                 Disponibilidade
               </label>
               <div className="mb-4 font-bold" id="availability">
-                {transformArrayInDaysAweek(daysOfWeek).join(" ● ")} <br />
+                {transformArrayInDaysAweek(daysOfWeek)?.join(" ● ")} <br />
                 {convertMinutesToHourString(hourStart)} -
                 {convertMinutesToHourString(hourEnd)}
               </div>
@@ -75,6 +76,6 @@ export default function AdCard({
           </div>
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 }
