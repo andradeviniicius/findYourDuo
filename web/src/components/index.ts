@@ -11,4 +11,3 @@ export { default as SelectInput } from "./Input/SelectInput";
 export { default as DefaultInput } from "./Input/DefaultInput";
 export { default as DaysOfWeek } from "./Input/DaysOfWeek";
 export { default as TimeToPlay } from "./Input/TimeToPlay";
-export { default as Checkbox } from "./Input/Checkbox";

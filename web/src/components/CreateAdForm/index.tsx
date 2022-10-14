@@ -1,23 +1,21 @@
 import { GameController } from "phosphor-react";
-import { useAppDispatch } from "../../app/hooks";
-import { openModal, closeModal } from "../../features/modal/createAdModalSlice";
 import { useForm, SubmitHandler } from "react-hook-form";
+import { Checkbox, CheckboxIndicator } from "@radix-ui/react-checkbox";
+
 type Inputs = {
   example: string;
   exampleRequired: string;
 };
 
+import { DaysOfWeek, SelectInput, DefaultInput, TimeToPlay } from "..";
 import {
-  DaysOfWeek,
-  SelectInput,
-  DefaultInput,
-  Checkbox,
-  TimeToPlay,
-} from "..";
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogTitle,
+} from "@radix-ui/react-alert-dialog";
+import { Label } from "@radix-ui/react-label";
 
 export default function PostAdForm() {
-  const dispatch = useAppDispatch();
-
   const {
     register,
     handleSubmit,
@@ -32,9 +30,9 @@ export default function PostAdForm() {
         <div className="relative w-auto max-w-lg my-6 mx-auto ">
           <div className=" px-10 py-8 border-0 rounded-lg relative flex flex-col w-auto bg-[#2A2634] outline-none focus:outline-none">
             <div className="flex items-start justify-start mb-8">
-              <h3 className="text-3xl font-black w-full">
+              <AlertDialogTitle className="text-3xl font-black w-full">
                 Publique um anúncio
-              </h3>
+              </AlertDialogTitle>
             </div>
             <SelectInput label="Qual o game?" />
             <DefaultInput
@@ -56,27 +54,46 @@ export default function PostAdForm() {
               />
             </div>
 
-              <DaysOfWeek />
-              <TimeToPlay label="Qual o horário do dia?" />
+            <DaysOfWeek />
+            <TimeToPlay label="Qual o horário do dia?" />
 
-            <Checkbox label="Costumo me conectar ao chat de voz" />
+            <div className="flex">
+              <div className="flex items-center mr-4">
+                <Checkbox>
+                  <input
+                    id="inline-checkbox"
+                    className="w-4 h-4 text-blue-600 bg-gray-100 rounded border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+                  />
+                </Checkbox>
+                <Label
+                  className={
+                    "ml-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+                  }
+                  htmlFor="inline-checkbox"
+                >
+                  Costumo me conectar ao chat de voz
+                </Label>
+              </div>
+            </div>
 
             <div className="flex items-center justify-end p-6 rounded-b gap-4">
-              <button
-                type="button"
-                onClick={() => dispatch(closeModal())}
-                className="py-3 px-4 bg-zinc-500 font-bold hover:bg-zinc-600 text-white rounded flex items-center"
-              >
-                Cancelar
-              </button>
-              <button
-                type="button"
-                onClick={() => dispatch(openModal())}
-                className="py-3 px-4 bg-violet-500 hover:bg-violet-600 text-white rounded flex items-center gap-3"
-              >
-                <GameController size={24} />
-                Encontrar Duo
-              </button>
+              <AlertDialogCancel asChild>
+                <button
+                  type="button"
+                  className="py-3 px-4 bg-zinc-500 font-bold hover:bg-zinc-600 text-white rounded flex items-center"
+                >
+                  Cancelar
+                </button>
+              </AlertDialogCancel>
+              <AlertDialogAction asChild>
+                <button
+                  type="button"
+                  className="py-3 px-4 bg-violet-500 hover:bg-violet-600 text-white rounded flex items-center gap-3"
+                >
+                  <GameController size={24} />
+                  Encontrar Duo
+                </button>
+              </AlertDialogAction>
             </div>
           </div>
         </div>

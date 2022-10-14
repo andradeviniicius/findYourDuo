@@ -7,6 +7,10 @@
   },
   "dependencies": {
     "@prisma/client": "^4.4.0",
+    "@radix-ui/react-alert-dialog": "^1.0.0",
+    "@radix-ui/react-checkbox": "^1.0.0",
+    "@radix-ui/react-label": "^1.0.0",
+    "@radix-ui/react-toggle-group": "^1.0.0",
     "@reduxjs/toolkit": "^1.8.5",
     "@types/react-redux": "^7.1.24",
     "framer-motion": "^7.5.3",
