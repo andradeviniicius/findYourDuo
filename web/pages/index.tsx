@@ -1,4 +1,5 @@
-import { MainTitle, CreateGame, GameList } from "../src/components";
+import { MainTitle, CreateGame, GameList, Spinner } from "../src/components";
+import removeSpinner from "../src/utils/removeSpinner";
 
 export async function getServerSideProps() {
   const res = await fetch("https://api.twitch.tv/helix/games/top", {
@@ -14,11 +15,16 @@ export async function getServerSideProps() {
 
 const Home = (props: any) => {
   return (
-    <div className="flex flex-col 2xl:container 2xl:mx-auto 2xl:px-0 py-3">
-      <MainTitle />
-      <GameList twitchTopGames={props.data} />
-      <CreateGame />
-    </div>
+    <>
+      <Spinner>
+        <div className="flex flex-col 2xl:container 2xl:mx-auto 2xl:px-0 py-3">
+          <MainTitle />
+          <GameList twitchTopGames={props.data} />
+          <CreateGame />
+        </div>
+      </Spinner>
+      {removeSpinner()}
+    </>
   );
 };
 export default Home;
