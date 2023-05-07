@@ -47,7 +47,7 @@ export default function Carousel({ children }: any) {
   }, []);
 
   return (
-    <div className="carousel my-12">
+    <div className="carousel my-10">
       <div className="relative overflow-hidden">
         <div className="flex justify-between items-center top left w-full h-full">
           <div className="h-full">
@@ -58,7 +58,7 @@ export default function Carousel({ children }: any) {
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                className="h-12 w-20 -ml-5"
+                className="h-10 w-20 -ml-5"
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor"
@@ -73,12 +73,14 @@ export default function Carousel({ children }: any) {
               <span className="sr-only">Prev</span>
             </button>
           </div>
+
           <div
             ref={carousel}
-            className="carousel-container relative flex gap-6 overflow-hidden scroll-smooth snap-x snap-mandatory touch-pan-x z-0"
+            className="carousel-container relative flex gap-5 overflow-hidden scroll-smooth snap-x snap-mandatory touch-pan-x z-0"
           >
             {children}
           </div>
+
           <button
             onClick={moveNext}
             className="hover:bg-blue-900/75 text-white py-3 mx-2 w-10 h-full text-center opacity-75 hover:opacity-100 disabled:opacity-25 disabled:cursor-not-allowed z-10 p-0 m-0 transition-all ease-in-out duration-300"
@@ -86,7 +88,7 @@ export default function Carousel({ children }: any) {
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              className="h-12 w-20 -ml-5"
+              className="h-10 w-20 -ml-5"
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"

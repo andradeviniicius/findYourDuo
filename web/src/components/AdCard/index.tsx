@@ -66,7 +66,7 @@ export default function AdCard({
 
               <button
                 type="button"
-                onClick={() => console.log("aa")}
+                onClick={() => window.alert("Sorry something went wrong :(")}
                 className=" w-full py-3 px-4 bg-violet-500 hover:bg-violet-600 text-white rounded flex items-center justify-center gap-3"
               >
                 <GameController size={24} />

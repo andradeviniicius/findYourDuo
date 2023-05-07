@@ -16,7 +16,7 @@ export default function GameCard({
 }: Props) {
   return (
     <div
-      className="carousel-item text-center relative w-[180] h-60 snap-start"
+      className="carousel-item text-center relative w-[180] h-48 snap-start"
     >
         <Link href={`/games/${gameId}`}>
           <a className="h-full w-full aspect-[3/4] block bg-origin-padding bg-left-top bg-cover bg-no-repeat z-0 ">
@@ -28,11 +28,11 @@ export default function GameCard({
             />
 
             <div className="w-full pt-16 pb-4 bg-game-gradient absolute bottom-0 left-0 right-0">
-              <strong className="font-bold text-white block">
+              <strong className="font-bold text-white block text-xs">
                 {gameTitle}
               </strong>
-              <span className="text-zinc-300 text-sm block">
-                {adsCount} Ad(s)
+              <span className="text-zinc-300 text-xs block">
+                {adsCount ? adsCount : 4} Pessoas aguardando
               </span>
             </div>
           </a>
@@ -40,3 +40,4 @@ export default function GameCard({
     </div>
   );
 }
+1

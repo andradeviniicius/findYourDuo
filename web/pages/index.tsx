@@ -17,7 +17,7 @@ const Home = (props: any) => {
   return (
     <>
       <Spinner>
-        <div className="flex flex-col 2xl:container 2xl:mx-auto 2xl:px-0 py-3">
+        <div className="flex flex-col 2xl:container 2xl:mx-auto 2xl:px-0 py-3 max-w-2xl">
           <MainTitle />
           <GameList twitchTopGames={props.data} />
           <CreateGame />
