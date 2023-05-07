@@ -32,7 +32,8 @@ In development, any contribution will be welcome :)
    - TWITCH_CLIENT_ID=your_twitch_cliendid
    - TWITCH_SECRET=your_twitch_secret
    - TWITCH_ACCESS_TOKEN=your_twitch_accesstoken
-- Run `npm run dev`
+- Run `npm run build`
+- Run `npm run start`
 - Now simply access `localhost:3000`
 
 ### Technologies Used
