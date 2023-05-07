@@ -1,41 +1,42 @@
 # 🎮findYourDuo
 
-O findYourDuo é uma aplicação web desenvolvida durante o evento NLW eSports na trilha Ignite da [@RocketSeat](https://www.rocketseat.com.br/) e dado continuidade por mim pós evento
+FindYourDuo is a web application developed during the NLW eSports event on the Ignite track by [@RocketSeat](https://www.rocketseat.com.br/) and continued by me after the event.
 
-### Seções:
+### Sections:
 
-- [Status do Projeto](#status-do-projeto)
-- [Instalação](#instalacao)
-- [Tecnologias utilizadas](#tecnologias-utilizadas)
-- [Autoria](#autoria)
+- [About](#about)
+- [Project Status](#project-status)
+- [Installation](#installation)
+- [Technologies Used](#technologies-used)
+- [Authorship](#authorship)
 
-### Sobre
+### About
 
-#### Começo
+#### Beginning
 
-A ideia inicial do findYourDuo foi desenvolvida no evento gratuito de 1 semana oferecido pela [@RocketSeat](https://www.rocketseat.com.br/), portanto todo o Design e idéia foram dos organizadores do NLW eSports e profissionais que colaboraram no evento.
+The initial idea for FindYourDuo was developed during the event offered by [@RocketSeat](https://www.rocketseat.com.br/), so all the design and idea came from the organizers of the NLW eSports and professionals who collaborated on the event.
 
-#### Pós
+#### Post-event
 
-Após o término do evento eu resolvi dar continuidade no projeto adicionando algumas ferramentas como NextJS, Redux, MongoDB, integração com a TwitchAPI e IGDB Api entre varias outras tasks que nao foram abordadas no curso tanto para o FrontEnd da aplicação quanto ao BackEnd .
+After the event, I decided to continue the project by adding some tools such as NextJS, Redux, MongoDB, integration with TwitchAPI and IGDB Api, among several other tasks that were not covered in the course for both the Frontend and Backend of the application.
 
-### Status do Projeto
+### Project Status
 
-Em desenvolvimento, qualquer contribuição será bem-vinda :)
+In development, any contribution will be welcome :)
 
-### Instalação
+### Installation
 
-- Clone o repositório na sua máquina
-- execute `npm install` ou `yarn install`
-- execute `npm run dev`
-- Agora basta acessar `localhost:3000`
+- Clone the repository on your machine
+- Run `npm install` or `yarn install`
+- Run `npm run dev`
+- Now simply access `localhost:3000`
 
-### Tecnologias utilizadas
-✅ Implementado
-❌ Removido
-🚧 Em progresso
+### Technologies Used
+✅ Implemented
+❌ Removed
+🚧 In progress
 
-| Durante o evento: | Atualmente:          |
+| During the event: | Currently:          |
 | ----------------- | -------------------- |
 | React             | ✅ React             |
 | React Native      | 🚧 React Native      |
@@ -44,7 +45,7 @@ Em desenvolvimento, qualquer contribuição será bem-vinda :)
 | SQLite            | 🚧 React-hook-form   |
 | TypeScript        | ✅ TypeScript        |
 |                   | ✅ Prisma            |
-|                   | ❌SQLite             |
+|                   | ❌ SQLite            |
 |                   | 🚧 MongoDB           |
 |                   | ✅ NextJS            |
 |                   | ✅ Redux RTK         |
@@ -52,7 +53,7 @@ Em desenvolvimento, qualquer contribuição será bem-vinda :)
 |                   | 🚧 IGDB API          |
 
 
-##### Autoria
+##### Authorship
 
 [@Vinicius de Andrade](https://github.com/andradeviniicius)
 [@RocketSeat](https://www.rocketseat.com.br/)
