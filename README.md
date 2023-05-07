@@ -28,10 +28,10 @@ In development, any contribution will be welcome :)
 
 - Clone the repository on your machine
 - In the /web folder run `npm install` or `yarn install`
-- set the following environment variables following this tutorial https://nextjs.org/docs/pages/building-your-application/configuring/environment-variables:
-TWITCH_CLIENT_ID
-TWITCH_SECRET
-MONGODB_URI
+- Set the following environment variables following this tutorial </br> https://nextjs.org/docs/pages/building-your-application/configuring/environment-variables
+   - TWITCH_CLIENT_ID=your_twitch_cliendid
+   - TWITCH_SECRET=your_twitch_secret
+   - TWITCH_ACCESS_TOKEN=your_twitch_accesstoken
 - Run `npm run dev`
 - Now simply access `localhost:3000`
 
