@@ -1,9 +1,7 @@
-import Link from "next/link";
 import { useRouter } from "next/router";
 import { ArrowLeft } from "phosphor-react";
 import { Carousel, AdCard, Spinner } from "../../src/components";
 import removeSpinner from "../../src/utils/removeSpinner";
-import useGameData from "../../src/hooks/useGameData";
 import { fakeAds } from "./data";
 
 export async function getServerSideProps(context) {
@@ -21,18 +19,18 @@ export async function getServerSideProps(context) {
 }
 
 export default function GameAdsPage(props: any) {
+  const router = useRouter();
   if (props.data.error) {
     return (
       <>
-        <Link href={"/"}>
-          <button
-            type="button"
-            className=" w-34 ml-10 mt-10 py-3 px-4 bg-violet-500 hover:bg-violet-600 text-white rounded flex items-center justify-center gap-3"
-          >
-            <ArrowLeft size={24} />
-            Voltar
-          </button>
-        </Link>
+        <button
+          type="button"
+          className=" w-34 ml-10 mt-10 py-3 px-4 bg-violet-500 hover:bg-violet-600 text-white rounded flex items-center justify-center gap-3"
+          onClick={() => router.push("/")}
+        >
+          <ArrowLeft size={24} />
+          Voltar
+        </button>
         <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative my-10">
           <strong className="font-bold">Hey user! </strong>
           <span className="block sm:inline">
@@ -47,21 +45,18 @@ export default function GameAdsPage(props: any) {
 
   const gameName = props.data.data[0].name;
 
-  const router = useRouter();
-
   return (
     <>
       <Spinner>
         {/* Use IGDB API To get game info */}
-        <Link href={"/"}>
-          <button
-            type="button"
-            className=" w-34 ml-10 mt-10 py-3 px-4 bg-violet-500 hover:bg-violet-600 text-white rounded flex items-center justify-center gap-3"
-          >
-            <ArrowLeft size={24} />
-            Voltar
-          </button>
-        </Link>
+        <button
+          type="button"
+          className=" w-34 ml-10 mt-10 py-3 px-4 bg-violet-500 hover:bg-violet-600 text-white rounded flex items-center justify-center gap-3"
+          onClick={() => router.push("/")}
+        >
+          <ArrowLeft size={24} />
+          Voltar
+        </button>
         <h1 className="text-6xl text-white font-black mt-20 text-center">
           {gameName ? gameName : ""}
         </h1>
