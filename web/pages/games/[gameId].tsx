@@ -89,7 +89,7 @@ export default function GameAdsPage(props: {
             <ArrowLeft size={24} />
             <p className="hidden md:block">Voltar</p>
           </button>
-          <h1 className="text-3xl max-h-12 col-span-1 justify-self-center md:text-6xl text-white font-black  text-center">
+          <h1 className="text-3xl col-span-1 justify-self-center md:text-6xl text-white font-black  text-center">
             {gameName ? gameName : ""}
           </h1>
         </div>
