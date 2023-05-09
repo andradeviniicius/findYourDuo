@@ -3,8 +3,29 @@ import { ArrowLeft } from "phosphor-react";
 import { Carousel, AdCard, Spinner } from "../../src/components";
 import removeSpinner from "../../src/utils/removeSpinner";
 import { fakeAds } from "./data";
+import { GetServerSideProps } from "next";
 
-export async function getServerSideProps(context) {
+interface TwitchGame {
+  id: string;
+  name: string;
+  box_art_url: string;
+  error?: string;
+  status?: number;
+  message?: string;
+}
+interface TwitchGamesResponse {
+  data: TwitchGame[];
+  pagination: {
+    cursor: string;
+  };
+}
+interface ServerSideProps {
+  data: TwitchGamesResponse;
+}
+
+export const getServerSideProps: GetServerSideProps<ServerSideProps> = async (
+  context
+) => {
   const gameId = context.query.gameId;
 
   const res = await fetch("https://api.twitch.tv/helix/games?id=" + gameId, {
@@ -13,14 +34,14 @@ export async function getServerSideProps(context) {
       "Client-Id": `${process.env.TWITCH_CLIENT_ID}`,
     },
   });
-  const data = await res.json();
+  const data: TwitchGamesResponse = await res.json();
 
   return { props: { data } };
-}
+};
 
-export default function GameAdsPage(props: any) {
+export default function GameAdsPage(props: { data: TwitchGamesResponse }) {
   const router = useRouter();
-  if (props.data.error) {
+  if (props.data.data[0].error) {
     return (
       <>
         <button
