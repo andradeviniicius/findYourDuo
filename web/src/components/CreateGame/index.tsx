@@ -11,7 +11,7 @@ export default function CreateGame(params: Props) {
 
   return (
     <div className="pt-1 bg-duo-gradient self-stretch rounded-lg mt-5 overflow-hidden">
-      <div className="bg-[#2A2634] px-6 py-5 flex justify-between items-center">
+      <div className="bg-[#2A2634] px-6 py-5 flex justify-between items-center gap-3">
         <div>
           <strong className="text-xl text-white font-black block">
             Não encontrou seu DUO?
@@ -26,7 +26,7 @@ export default function CreateGame(params: Props) {
           onClick={() => dispatch(openModal())}
           className="py-3 px-4 bg-violet-500 hover:bg-violet-600 text-white text-xs rounded flex items-center gap-3"
         >
-          <MagnifyingGlassPlus size={18} />
+          <MagnifyingGlassPlus className="md:block hidden" size={18} />
           Publicar anúncio
         </button>
 

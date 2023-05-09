@@ -28,9 +28,33 @@ export default function PostAdForm() {
 
   return (
     <>
-      <div className=" text-white justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none">
-        <div className="relative w-auto max-w-lg my-6 mx-auto ">
-          <div className=" px-10 py-8 border-0 rounded-lg relative flex flex-col w-auto bg-[#2A2634] outline-none focus:outline-none">
+      <div
+        className="text-white 
+        md:justify-center 
+        md:items-center
+        md:flex
+        overflow-x-hidden
+        md:overflow-y-auto
+        fixed
+        inset-0
+        z-50
+        md:outline-none
+        md:focus:outline-none
+        
+        overflow-y-auto
+        w-100%
+        h-100%
+        "
+      >
+        <div
+          className="
+        md:relative
+         md:w-auto 
+         md:max-w-lg 
+         md:my-6 
+         md:mx-auto "
+        >
+          <div className="py-4 px-4 border-0 md:rounded-lg relative flex flex-col w-auto bg-[#2A2634] outline-none focus:outline-none">
             <div className="flex items-start justify-start mb-8">
               <h3 className="text-3xl font-black w-full">
                 Publique um anúncio
@@ -56,8 +80,8 @@ export default function PostAdForm() {
               />
             </div>
 
-              <DaysOfWeek />
-              <TimeToPlay label="Qual o horário do dia?" />
+            <DaysOfWeek />
+            <TimeToPlay label="Qual o horário do dia?" />
 
             <Checkbox label="Costumo me conectar ao chat de voz" />
 
@@ -71,7 +95,7 @@ export default function PostAdForm() {
               </button>
               <button
                 type="button"
-                onClick={() => dispatch(openModal())}
+                onClick={() => {dispatch(closeModal()); window.alert('Sorry this functionality is not ready yet')}}
                 className="py-3 px-4 bg-violet-500 hover:bg-violet-600 text-white rounded flex items-center gap-3"
               >
                 <GameController size={24} />
