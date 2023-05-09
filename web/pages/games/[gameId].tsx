@@ -7,7 +7,6 @@ import {
   GetServerSidePropsContext,
   PreviewData,
 } from "next";
-import { BsArrowLeft } from "react-icons/bs";
 import { ParsedUrlQuery } from "querystring";
 
 interface TwitchGame {
