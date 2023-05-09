@@ -3,28 +3,33 @@ import { ArrowLeft } from "phosphor-react";
 import { Carousel, AdCard, Spinner } from "../../src/components";
 import removeSpinner from "../../src/utils/removeSpinner";
 import { fakeAds } from "../../helpers/fakeData";
-import { GetServerSideProps } from "next";
+import {
+  GetServerSidePropsContext,
+  PreviewData,
+} from "next";
 import { BsArrowLeft } from "react-icons/bs";
+import { ParsedUrlQuery } from "querystring";
+
 interface TwitchGame {
   id: string;
   name: string;
   box_art_url: string;
+}
+interface TwitchError {
   error?: string;
   status?: number;
   message?: string;
+  data?: TwitchGame[];
 }
 interface TwitchGamesResponse {
+  error?: string;
   data: TwitchGame[];
   pagination: {
     cursor: string;
   };
 }
-interface ServerSideProps {
-  data: TwitchGamesResponse;
-}
-
-export const getServerSideProps: GetServerSideProps<ServerSideProps> = async (
-  context
+export const getServerSideProps = async (
+  context: GetServerSidePropsContext<ParsedUrlQuery, PreviewData>
 ) => {
   const gameId = context.query.gameId;
 
@@ -34,24 +39,29 @@ export const getServerSideProps: GetServerSideProps<ServerSideProps> = async (
       "Client-Id": `${process.env.TWITCH_CLIENT_ID}`,
     },
   });
-  const data: TwitchGamesResponse = await res.json();
+  const data = await res.json();
 
   return { props: { data } };
 };
 
-export default function GameAdsPage(props: { data: TwitchGamesResponse }) {
+export default function GameAdsPage(props: {
+  data: TwitchGamesResponse | TwitchError;
+}) {
   const router = useRouter();
-  if (props.data.data[0].error) {
+
+  if (props.data.error) {
     return (
       <>
-        <button
-          type="button"
-          className="w-34 ml-10 mt-10 py-3 px-4 bg-violet-500 hover:bg-violet-600 text-white rounded flex items-center justify-center gap-3"
-          onClick={() => router.push("/")}
-        >
-          <BsArrowLeft className="md:text-5xl hidden" />
-          Voltar
-        </button>
+        <div className="grid grid-cols-[20%_60%_20%] md:grid-cols-3 items-center mt-12">
+          <button
+            type="button"
+            className="md:ml-[11%] md:w-34 max-w-[112px] py-1 w-1/2 md:py-3 md:px-4 md:bg-violet-500 hover:bg-violet-600 text-white rounded flex items-center justify-center gap-3"
+            onClick={() => router.push("/")}
+          >
+            <ArrowLeft size={24} />
+            <p className="hidden md:block">Voltar</p>
+          </button>
+        </div>
         <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative my-10">
           <strong className="font-bold">Hey user! </strong>
           <span className="block sm:inline">
@@ -64,7 +74,7 @@ export default function GameAdsPage(props: { data: TwitchGamesResponse }) {
     );
   }
 
-  const gameName = props.data.data[0].name;
+  const gameName = props.data.data![0].name;
 
   return (
     <>
