@@ -2,7 +2,7 @@ import { useRouter } from "next/router";
 import { ArrowLeft } from "phosphor-react";
 import { Carousel, AdCard, Spinner } from "../../src/components";
 import removeSpinner from "../../src/utils/removeSpinner";
-import { fakeAds } from "./data";
+import { fakeAds } from "../../helpers/fakeData";
 import { GetServerSideProps } from "next";
 
 interface TwitchGame {
