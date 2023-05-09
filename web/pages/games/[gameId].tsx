@@ -70,24 +70,26 @@ export default function GameAdsPage(props: { data: TwitchGamesResponse }) {
     <>
       <Spinner>
         {/* Use IGDB API To get game info */}
-        <button
-          type="button"
-          className=" w-34 ml-10 mt-10 py-3 px-4 bg-violet-500 hover:bg-violet-600 text-white rounded flex items-center justify-center gap-3"
-          onClick={() => router.push("/")}
-        >
-          <ArrowLeft size={24} />
-          Voltar
-        </button>
-        <h1 className="text-6xl text-white font-black mt-20 text-center">
-          {gameName ? gameName : ""}
-        </h1>
-        <h2 className="text-6xl text-white font-black mt-20 text-center">
+        <div className="grid grid-cols-3 items-center mt-12">
+          <button
+            type="button"
+            className="md:ml-[11%] md:w-34 max-w-[112px] py-3 px-4 bg-violet-500 hover:bg-violet-600 text-white rounded flex items-center justify-center gap-3"
+            onClick={() => router.push("/")}
+          >
+            <ArrowLeft size={24} />
+            Voltar
+          </button>
+          <h1 className="col-span-1 justify-self-center text-3xl md:text-6xl text-white font-black  text-center">
+            {gameName ? gameName : ""}
+          </h1>
+        </div>
+        <h2 className="md:text-5xl text-2xl text-white font-black mt-14 text-center">
           <span className="text-transparent bg-duo-gradient bg-clip-text">
             Conecte-se
           </span>{" "}
           e comece a jogar!
         </h2>
-        <div className="2xl:container 2xl:mx-auto 2xl:px-0 py-3 px-10">
+        <div className="2xl:container 2xl:mx-auto 2xl:px-0 py-3 md:px-10">
           <Carousel>
             {fakeAds.map((el, index) => {
               return (
