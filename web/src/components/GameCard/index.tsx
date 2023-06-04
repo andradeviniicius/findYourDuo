@@ -16,7 +16,7 @@ export default function GameCard({
 }: Props) {
   const router = useRouter();
   return (
-    <div className="carousel-item text-center relative w-[180] h-48 snap-start">
+    <div className="carousel-item text-center relative w-[180] h-48 snap-start hover:cursor-pointer">
       <a
         onClick={() => router.push(`/games/${gameId}`)}
         className="h-full w-full aspect-[3/4] block bg-origin-padding bg-left-top bg-cover bg-no-repeat z-0 "
