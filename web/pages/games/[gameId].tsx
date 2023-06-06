@@ -3,10 +3,7 @@ import { ArrowLeft } from "phosphor-react";
 import { Carousel, AdCard, Spinner } from "../../src/components";
 import removeSpinner from "../../src/utils/removeSpinner";
 import { fakeAds } from "../../helpers/fakeData";
-import {
-  GetServerSidePropsContext,
-  PreviewData,
-} from "next";
+import { GetServerSidePropsContext, PreviewData } from "next";
 import { ParsedUrlQuery } from "querystring";
 
 interface TwitchGame {
@@ -48,7 +45,7 @@ export default function GameAdsPage(props: {
 }) {
   const router = useRouter();
 
-  if (props.data.error) {
+  if (props.data.data?.length! <= 0) {
     return (
       <>
         <div className="grid grid-cols-[20%_60%_20%] md:grid-cols-3 items-center mt-12">
@@ -64,9 +61,10 @@ export default function GameAdsPage(props: {
         <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative my-10">
           <strong className="font-bold">Hey user! </strong>
           <span className="block sm:inline">
-            {" "}
-            something went wrong in the Twitch API, please refresh the page or
-            contact<strong> viniciusdandrade@gmail.com</strong>
+            {props.data.error
+              ? "Something went wrong in the Twitch API, please refresh the page"
+              : "This game doesn't exist in Twitch database, please go back"}{" "}
+            or contact<strong> viniciusdandrade@gmail.com</strong>
           </span>
         </div>
       </>
