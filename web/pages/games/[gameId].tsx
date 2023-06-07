@@ -5,6 +5,7 @@ import removeSpinner from "../../src/utils/removeSpinner";
 import { fakeAds } from "../../helpers/fakeData";
 import { GetServerSidePropsContext, PreviewData } from "next";
 import { ParsedUrlQuery } from "querystring";
+import useConnectionsByGameId from "../../src/hooks/useConnectionsByGameId";
 
 interface TwitchGame {
   id: string;
@@ -44,6 +45,8 @@ export default function GameAdsPage(props: {
   data: TwitchGamesResponse | TwitchError;
 }) {
   const router = useRouter();
+
+  const allGameConnections = useConnectionsByGameId(props.data.data![0].id);
 
   if (props.data.data?.length! <= 0) {
     return (
@@ -98,16 +101,17 @@ export default function GameAdsPage(props: {
         </h2>
         <div className="2xl:container 2xl:mx-auto 2xl:px-0 py-3 md:px-10">
           <Carousel>
-            {fakeAds.map((el, index) => {
+            {allGameConnections.map((el, index) => {
               return (
                 <AdCard
-                  adId={el.id}
-                  userName={el.name}
-                  timePlaying={el.timePlaying}
-                  daysOfWeek={el?.daysOfWeek}
-                  hourStart={el.hourStart}
-                  hourEnd={el.hourEnd}
-                  voiceCall={el.voiceCall}
+                  adId={el.connectionid}
+                  userName={el.playername}
+                  timePlaying={el.hoursplayed}
+                  daysOfWeek={el.daysofweek}
+                  hourStart={el.starthour}
+                  hourEnd={el.endhour}
+                  voiceCall={el.isvoicecall}
+                  discordNickname={el.discordNickname}
                   key={index}
                 />
               );

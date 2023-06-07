@@ -9,14 +9,16 @@ type Props = {
   adId: Number;
   userName: String;
   timePlaying: Number;
-  daysOfWeek: number[];
-  hourStart: number;
-  hourEnd: number;
+  daysOfWeek: string[];
+  hourStart: string;
+  hourEnd: string;
   voiceCall: boolean;
+  discordNickname: string;
 };
 
 export default function AdCard({
   adId,
+  discordNickname,
   userName,
   timePlaying,
   daysOfWeek,
@@ -24,6 +26,7 @@ export default function AdCard({
   hourEnd,
   voiceCall,
 }: Props) {
+
   return (
     <motion.div className="carousel-item relative w-72 snap-start        text-white">
       <div className="h-full w-full aspect-[3/4] block bg-origin-padding bg-left-top bg-cover bg-no-repeat z-0 ">
@@ -41,16 +44,21 @@ export default function AdCard({
                 Tempo de jogo
               </label>
               <p className="mb-4 font-bold" id="timePlaying">
-                {timePlaying + " Anos"}
+                {timePlaying + " Horas"}
               </p>
 
               <label className="mb-1 font-light" htmlFor="availability">
                 Disponibilidade
               </label>
               <div className="mb-4 font-bold" id="availability">
-                {transformArrayInDaysAweek(daysOfWeek)?.join(" ● ")} <br />
-                {convertMinutesToHourString(hourStart)} -
-                {convertMinutesToHourString(hourEnd)}
+                {daysOfWeek.map((el, index) => {
+                  return ` 
+                  ${el.slice(0, 3)}
+                  ${index !== daysOfWeek.length - 1 ? "-" : ""}
+                  `;
+                })}
+                <br />
+                {hourStart.slice(0, -3)} - {hourEnd.slice(0, -3)}
               </div>
 
               <label className="mb-1 font-light" htmlFor="voiceCall">
@@ -66,7 +74,11 @@ export default function AdCard({
 
               <button
                 type="button"
-                onClick={() => window.alert("Sorry but this functionality is currently on-progress and for now is only on visualization purposes and does not actually perform any act")}
+                onClick={() =>
+                  window.alert(
+                    "You can connect with this user in discord using the discord ID below: \n\n" + discordNickname
+                  )
+                }
                 className=" w-full py-3 px-4 bg-violet-500 hover:bg-violet-600 text-white rounded flex items-center justify-center gap-3"
               >
                 <GameController size={24} />
