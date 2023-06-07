@@ -14,14 +14,6 @@ export type Connection = {
   discordnickname: string;
 };
 
-import {
-  DaysOfWeek,
-  SelectInput,
-  DefaultInput,
-  Checkbox,
-  TimeToPlay,
-} from "..";
-
 export default function PostAdForm() {
   const dispatch = useAppDispatch();
 
