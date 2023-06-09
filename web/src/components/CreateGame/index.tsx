@@ -4,8 +4,8 @@ import { useAppSelector, useAppDispatch } from "../../app/hooks";
 import { openModal, closeModal } from "../../features/modal/createAdModalSlice";
 
 type Props = {
-  mainMessage: string;
-  subMessage: string;
+  mainMessage?: string;
+  subMessage?: string;
 };
 
 export default function CreateGame({ mainMessage, subMessage }: Props) {
