@@ -2,6 +2,9 @@ import { GameController } from "phosphor-react";
 import { useAppDispatch } from "../../app/hooks";
 import { openModal, closeModal } from "../../features/modal/createAdModalSlice";
 import { useForm, SubmitHandler } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import * as yup from "yup";
+
 export type Connection = {
   connectionid: number;
   playername: string;
@@ -16,19 +19,63 @@ export type Connection = {
 
 export default function PostAdForm() {
   const dispatch = useAppDispatch();
+  const validationSchema = yup.object({
+    connectionid: yup.string(),
+    gameid: yup
+      .string()
+      .required()
+      .oneOf(
+        [
+          "515024",
+          "509658",
+          "32982",
+          "55453844",
+          "516575",
+          "21779",
+          "27471",
+          "213930085",
+          "511224",
+          "1767487238",
+          "518203",
+          "33214",
+          "18122",
+          "512710",
+          "32399",
+          "263490",
+          "491487",
+          "29595",
+          "509659",
+          "29452",
+        ],
+        "Error "
+      ),
+    playername: yup.string(),
+    hoursplayed: yup.number(),
+    discordnickname: yup.string(),
+    daysofweek: yup.string(),
+    starthour: yup.string(),
+    endhour: yup.string(),
+    isvoicecall: yup.string(),
+  });
 
   const {
     register,
     handleSubmit,
     watch,
+    reset,
     formState: { errors },
-  } = useForm<Connection>();
-  const onSubmit: SubmitHandler<Connection> = (data) => console.log(data);
+  } = useForm<Connection>({ resolver: yupResolver(validationSchema) });
+
+  const onSubmit: SubmitHandler<Connection> = (data) =>
+    console.log("data", data);
   console.log(watch());
+  console.log("errors", errors);
 
   return (
     <form
-      onSubmit={(data) => {
+      onSubmit={(e) => {
+        e.preventDefault();
+        alert("Feature not ready yet :/");
         handleSubmit(onSubmit);
         dispatch(closeModal());
       }}
@@ -72,14 +119,31 @@ export default function PostAdForm() {
               {...register("gameid")}
             >
               <option value="1">Selecione o game que deseja jogar</option>
-              <option value="1">Game1</option>
-              <option value="2">Game2</option>
-              <option value="3">Game3</option>
+              <option value="515024"> Diablo IV</option>
+              <option value="509658"> Just Chatting</option>
+              <option value="32982"> Grand Theft Auto V</option>
+              <option value="55453844"> Street Fighter 6</option>
+              <option value="516575"> VALORANT</option>
+              <option value="21779"> League of Legends</option>
+              <option value="27471"> Minecraft</option>
+              <option value="213930085"> Honkai: Star Rail</option>
+              <option value="511224"> Apex Legends</option>
+              <option value="1767487238"> Casino Slot Machine</option>
+              <option value="518203"> Sports</option>
+              <option value="33214"> Fortnite</option>
+              <option value="18122"> World of Warcraft</option>
+              <option value="512710"> Call of Duty: Warzone</option>
+              <option value="32399"> Counter-Strike: Global Offensive</option>
+              <option value="263490"> Rust</option>
+              <option value="491487"> Dead by Daylight</option>
+              <option value="29595"> Dota 2</option>
+              <option value="509659"> ASMR</option>
+              <option value="29452"> Virtual Casino</option>
             </select>
           </div>
           <div className="w-full flex flex-col justify-start gap-2 mb-4">
             <label htmlFor="defaultInput" className="font-semibold leading-7">
-              "Seu nome (ou nickname)"
+              Seu nome (ou nickname)
             </label>
             <input
               className="placeholder:text-zinc-500 bg-zinc-900 h-12 rounded text-sm px-4 font-serif"
@@ -93,7 +157,7 @@ export default function PostAdForm() {
           <div className="w-full flex gap-6">
             <div className="w-full flex flex-col justify-start gap-2 mb-4">
               <label htmlFor="defaultInput" className="font-semibold leading-7">
-                "Quantas horas de jogo?"
+                Quantas horas de jogo?
               </label>
               <input
                 className="placeholder:text-zinc-500 bg-zinc-900 h-12 rounded text-sm px-4 font-serif"
@@ -105,7 +169,7 @@ export default function PostAdForm() {
             </div>
             <div className="w-full flex flex-col justify-start gap-2 mb-4">
               <label htmlFor="defaultInput" className="font-semibold leading-7">
-                "Qual seu Discord?"
+                Qual seu Discord?
               </label>
               <input
                 className="placeholder:text-zinc-500 bg-zinc-900 h-12 rounded text-sm px-4 font-serif"
@@ -142,7 +206,7 @@ export default function PostAdForm() {
             className={`w-full mb-6 flex flex-wrap gap-3 font-semibold leading-7 mb-2`}
           >
             <label htmlFor="timeToPlay" className="w-full">
-              "Qual o horário do dia?"
+              Qual o horário do dia?
             </label>
 
             <p className="flex items-center font-normal">De</p>
@@ -151,12 +215,14 @@ export default function PostAdForm() {
               id="timeToPlay"
               type="time"
               placeholder="De"
+              {...register("starthour")}
             />
             <p className="flex items-center font-normal">Até</p>
             <input
               className="w-18 flex justify-center items-center placeholder:text-zinc-500 bg-zinc-900 h-12 rounded text-sm px-4 font-serif"
               id="timeToPlay"
               type="time"
+              {...register("endhour")}
             />
           </div>
 
@@ -167,6 +233,7 @@ export default function PostAdForm() {
                 type="checkbox"
                 value=""
                 className="w-4 h-4 text-blue-600 bg-gray-100 rounded border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+                {...register("isvoicecall")}
               />
               <label
                 htmlFor="inline-checkbox"
@@ -180,7 +247,10 @@ export default function PostAdForm() {
           <div className="flex items-center justify-end p-6 rounded-b gap-4">
             <button
               type="button"
-              onClick={() => dispatch(closeModal())}
+              onClick={() => {
+                reset();
+                dispatch(closeModal());
+              }}
               className="py-3 px-4 bg-zinc-500 font-bold hover:bg-zinc-600 text-white rounded flex items-center"
             >
               Cancelar

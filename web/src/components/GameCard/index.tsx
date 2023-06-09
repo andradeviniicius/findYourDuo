@@ -32,9 +32,9 @@ export default function GameCard({
           <strong className="font-bold text-white block text-xs">
             {gameTitle}
           </strong>
-          <span className="text-zinc-300 text-xs block">
+          {/* <span className="text-zinc-300 text-xs block">
             {adsCount ? adsCount : 4} Pessoas aguardando
-          </span>
+          </span> */}
         </div>
       </a>
     </div>

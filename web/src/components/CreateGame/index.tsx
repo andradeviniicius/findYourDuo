@@ -3,9 +3,12 @@ import { CreateAdForm } from "../../components";
 import { useAppSelector, useAppDispatch } from "../../app/hooks";
 import { openModal, closeModal } from "../../features/modal/createAdModalSlice";
 
-type Props = {};
+type Props = {
+  mainMessage: string;
+  subMessage: string;
+};
 
-export default function CreateGame(params: Props) {
+export default function CreateGame({ mainMessage, subMessage }: Props) {
   const isModalOpen = useAppSelector((state) => state.modal.active);
   const dispatch = useAppDispatch();
 
@@ -14,10 +17,12 @@ export default function CreateGame(params: Props) {
       <div className="bg-[#2A2634] px-6 py-5 flex justify-between items-center gap-3">
         <div>
           <strong className="text-xl text-white font-black block">
-            Não encontrou seu DUO?
+            {mainMessage ? mainMessage : "Não encontrou seu DUO?"}
           </strong>
           <span className="text-zinc-400 block text-xs">
-            Publique um anúncio para encontrar novos players!
+            {subMessage
+              ? subMessage
+              : "Publique um anúncio para encontrar novos players!"}
           </span>
         </div>
 

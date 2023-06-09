@@ -1,6 +1,6 @@
 import { useRouter } from "next/router";
 import { ArrowLeft } from "phosphor-react";
-import { Carousel, AdCard, Spinner } from "../../src/components";
+import { Carousel, AdCard, Spinner, CreateGame } from "../../src/components";
 import removeSpinner from "../../src/utils/removeSpinner";
 import { fakeAds } from "../../helpers/fakeData";
 import { GetServerSidePropsContext, PreviewData } from "next";
@@ -100,23 +100,30 @@ export default function GameAdsPage(props: {
           e comece a jogar!
         </h2>
         <div className="2xl:container 2xl:mx-auto 2xl:px-0 py-3 md:px-10">
-          <Carousel>
-            {allGameConnections.map((el, index) => {
-              return (
-                <AdCard
-                  adId={el.connectionid}
-                  userName={el.playername}
-                  timePlaying={el.hoursplayed}
-                  daysOfWeek={el.daysofweek}
-                  hourStart={el.starthour}
-                  hourEnd={el.endhour}
-                  voiceCall={el.isvoicecall}
-                  discordNickname={el.discordNickname}
-                  key={index}
-                />
-              );
-            })}
-          </Carousel>
+          {allGameConnections.length === 0 ? (
+            <CreateGame
+              mainMessage="Ainda não há anúncios para este jogo"
+              subMessage='Seja o primeiro clicando no botão de "Publicar anúncio" ao lado!'
+            />
+          ) : (
+            <Carousel>
+              {allGameConnections.map((el, index) => {
+                return (
+                  <AdCard
+                    adId={el.connectionid}
+                    userName={el.playername}
+                    timePlaying={el.hoursplayed}
+                    daysOfWeek={el.daysofweek}
+                    hourStart={el.starthour}
+                    hourEnd={el.endhour}
+                    voiceCall={el.isvoicecall}
+                    discordNickname={el.discordNickname}
+                    key={index}
+                  />
+                );
+              })}
+            </Carousel>
+          )}
         </div>
       </Spinner>
       {removeSpinner()}
