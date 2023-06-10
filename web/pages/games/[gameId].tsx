@@ -117,7 +117,7 @@ export default function GameAdsPage(props: {
                     hourStart={el.starthour}
                     hourEnd={el.endhour}
                     voiceCall={el.isvoicecall}
-                    discordNickname={el.discordNickname}
+                    discordNickname={el.discordnickname}
                     key={index}
                   />
                 );
