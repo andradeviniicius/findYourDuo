@@ -30,7 +30,7 @@ const useConnectionsByGameId = (gameId: string) => {
         const { data, error } = await supabase
           .from("connections")
           .select()
-          .eq("gameId", gameId);
+          .eq("gameid", gameId);
 
         if (error) {
           throw new Error(error.message);

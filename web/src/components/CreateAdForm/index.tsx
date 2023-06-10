@@ -4,6 +4,12 @@ import { openModal, closeModal } from "../../features/modal/createAdModalSlice";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
+import ErrorMessage from "../ErrorMessage";
+import { ChangeEvent } from "react";
+import turnWeekdayIntoId from "../../utils/turnWeekdayIntoId";
+import useInsertNewConnection from "../../hooks/useInsertNewConnection";
+import getFullDayName from "../../utils/getFulldayName";
+import { useRouter } from 'next/router'
 
 export type Connection = {
   connectionid: number;
@@ -18,7 +24,8 @@ export type Connection = {
 };
 
 export default function PostAdForm() {
-  const dispatch = useAppDispatch();
+const router = useRouter()
+const dispatch = useAppDispatch();
   const validationSchema = yup.object({
     connectionid: yup.string(),
     gameid: yup
@@ -47,15 +54,18 @@ export default function PostAdForm() {
           "509659",
           "29452",
         ],
-        "Error "
+        "Selecione pelo menos um item da lista "
       ),
-    playername: yup.string(),
-    hoursplayed: yup.number(),
-    discordnickname: yup.string(),
-    daysofweek: yup.string(),
-    starthour: yup.string(),
-    endhour: yup.string(),
-    isvoicecall: yup.string(),
+    playername: yup.string().required("Campo obrigatório"),
+    hoursplayed: yup.string().required("Campo obrigatório"),
+    discordnickname: yup
+      .string()
+      .matches(/^.{3,32}#[0-9]{4}$/, "Favor seguir este formato: exemplo#1234")
+      .required("Field is required"),
+    daysofweek: yup.array().of(yup.string()),
+    starthour: yup.string().required("Campo obrigatório"),
+    endhour: yup.string().required("Campo obrigatório"),
+    isvoicecall: yup.boolean().required("Campo obrigatório"),
   });
 
   const {
@@ -63,22 +73,33 @@ export default function PostAdForm() {
     handleSubmit,
     watch,
     reset,
+    resetField,
+    setValue,
     formState: { errors },
   } = useForm<Connection>({ resolver: yupResolver(validationSchema) });
 
-  const onSubmit: SubmitHandler<Connection> = (data) =>
-    console.log("data", data);
+  const onSubmit: SubmitHandler<Connection> = (data) => {
+    useInsertNewConnection(data);
+    router.push(`/games/${data.gameid}`)
+    dispatch(closeModal());
+  };
   console.log(watch());
-  console.log("errors", errors);
+
+  const handleWeekdayCheckbox = (e: ChangeEvent<HTMLInputElement>) => {
+    const dayOfWeek = e.target.id.replace("weekday-", "");
+    if (e.target.checked) {
+      setValue(
+        `daysofweek.${turnWeekdayIntoId(dayOfWeek)}`,
+        getFullDayName(dayOfWeek)
+      );
+    } else {
+      setValue(`daysofweek.${turnWeekdayIntoId(dayOfWeek)}`, "");
+    }
+  };
 
   return (
     <form
-      onSubmit={(e) => {
-        e.preventDefault();
-        alert("Feature not ready yet :/");
-        handleSubmit(onSubmit);
-        dispatch(closeModal());
-      }}
+      onSubmit={handleSubmit(onSubmit)}
       className="text-white 
         md:justify-center 
         md:items-center
@@ -140,6 +161,7 @@ export default function PostAdForm() {
               <option value="509659"> ASMR</option>
               <option value="29452"> Virtual Casino</option>
             </select>
+            <ErrorMessage>{errors.gameid?.message}</ErrorMessage>
           </div>
           <div className="w-full flex flex-col justify-start gap-2 mb-4">
             <label htmlFor="defaultInput" className="font-semibold leading-7">
@@ -152,6 +174,7 @@ export default function PostAdForm() {
               placeholder="Como te chamam dentro do game?"
               {...register("playername")}
             />
+            <ErrorMessage>{errors.playername?.message}</ErrorMessage>
           </div>
 
           <div className="w-full flex gap-6">
@@ -162,10 +185,11 @@ export default function PostAdForm() {
               <input
                 className="placeholder:text-zinc-500 bg-zinc-900 h-12 rounded text-sm px-4 font-serif"
                 id="defaultInput"
-                type="text"
+                type="number"
                 placeholder="Tudo bem ser zero :)"
                 {...register("hoursplayed")}
               />
+              <ErrorMessage>{errors.hoursplayed?.message}</ErrorMessage>
             </div>
             <div className="w-full flex flex-col justify-start gap-2 mb-4">
               <label htmlFor="defaultInput" className="font-semibold leading-7">
@@ -178,29 +202,67 @@ export default function PostAdForm() {
                 placeholder="Usuario#0000"
                 {...register("discordnickname")}
               />
+              <ErrorMessage>{errors.discordnickname?.message}</ErrorMessage>
             </div>
           </div>
 
-          <div className={`w-full mb-6`}>
+          <div className={`w-full flex flex-col mb-6 gap-2`}>
             <p className="font-semibold leading-7 mb-2">
               Quando costuma jogar?
             </p>
             <div className="weekDays-selector font-bold text-base">
-              <input type="checkbox" id="weekday-sun" className="weekday" />
+              <input
+                type="checkbox"
+                id="weekday-sun"
+                className="weekday"
+                onChange={(e) => handleWeekdayCheckbox(e)}
+              />
               <label htmlFor="weekday-sun">D</label>
-              <input type="checkbox" id="weekday-mon" className="weekday" />
-              <label htmlFor="weekday-mon">S</label>
-              <input type="checkbox" id="weekday-tue" className="weekday" />
+              <input
+                type="checkbox"
+                id="weekday-mon"
+                className="weekday"
+                onChange={(e) => handleWeekdayCheckbox(e)}
+              />
+              <label htmlFor="weekday-mon">M</label>
+              <input
+                type="checkbox"
+                id="weekday-tue"
+                className="weekday"
+                onChange={(e) => handleWeekdayCheckbox(e)}
+              />
               <label htmlFor="weekday-tue">T</label>
-              <input type="checkbox" id="weekday-wed" className="weekday" />
-              <label htmlFor="weekday-wed">Q</label>
-              <input type="checkbox" id="weekday-thu" className="weekday" />
-              <label htmlFor="weekday-thu">Q</label>
-              <input type="checkbox" id="weekday-fri" className="weekday" />
-              <label htmlFor="weekday-fri">S</label>
-              <input type="checkbox" id="weekday-sat" className="weekday" />
+              <input
+                type="checkbox"
+                id="weekday-wed"
+                className="weekday"
+                onChange={(e) => handleWeekdayCheckbox(e)}
+              />
+              <label htmlFor="weekday-wed">W</label>
+              <input
+                type="checkbox"
+                id="weekday-thu"
+                className="weekday"
+                onChange={(e) => handleWeekdayCheckbox(e)}
+              />
+              <label htmlFor="weekday-thu">T</label>
+              <input
+                type="checkbox"
+                id="weekday-fri"
+                className="weekday"
+                onChange={(e) => handleWeekdayCheckbox(e)}
+              />
+              <label htmlFor="weekday-fri">F</label>
+              <input
+                type="checkbox"
+                id="weekday-sat"
+                className="weekday"
+                onChange={(e) => handleWeekdayCheckbox(e)}
+              />
               <label htmlFor="weekday-sat">S</label>
             </div>
+
+            <ErrorMessage>{errors.daysofweek?.message}</ErrorMessage>
           </div>
           <div
             className={`w-full mb-6 flex flex-wrap gap-3 font-semibold leading-7 mb-2`}
@@ -225,6 +287,10 @@ export default function PostAdForm() {
               {...register("endhour")}
             />
           </div>
+          <div className="flex">
+            <ErrorMessage>{errors.starthour?.message}</ErrorMessage>
+            <ErrorMessage>{errors.endhour?.message}</ErrorMessage>
+          </div>
 
           <div className="flex">
             <div className="flex items-center mr-4">
@@ -241,6 +307,7 @@ export default function PostAdForm() {
               >
                 Costumo me conectar ao chat de voz
               </label>
+              <ErrorMessage>{errors.isvoicecall?.message}</ErrorMessage>
             </div>
           </div>
 
