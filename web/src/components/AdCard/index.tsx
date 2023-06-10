@@ -1,9 +1,7 @@
 import { GameController } from "phosphor-react";
+import getPortugueseDayOfWeek from "../../utils/getPortugueseDayOfWeek";
 
 import { motion } from "framer-motion";
-
-import transformArrayInDaysAweek from "../../utils/transformArrayInDaysAweek";
-import convertMinutesToHourString from "../../../pages/api/utils/convertMinuteStringToHours";
 
 type Props = {
   adId: Number;
@@ -26,7 +24,6 @@ export default function AdCard({
   hourEnd,
   voiceCall,
 }: Props) {
-
   return (
     <motion.div className="carousel-item relative w-72 snap-start        text-white">
       <div className="h-full w-full aspect-[3/4] block bg-origin-padding bg-left-top bg-cover bg-no-repeat z-0 ">
@@ -52,8 +49,9 @@ export default function AdCard({
               </label>
               <div className="mb-4 font-bold" id="availability">
                 {daysOfWeek.map((el, index) => {
+                  let portugueseDayOfWeek = getPortugueseDayOfWeek(el);
                   return ` 
-                  ${el.slice(0, 3)}
+                  ${portugueseDayOfWeek.slice(0, 3)}
                   ${index !== daysOfWeek.length - 1 ? "-" : ""}
                   `;
                 })}
@@ -76,7 +74,8 @@ export default function AdCard({
                 type="button"
                 onClick={() =>
                   window.alert(
-                    "You can connect with this user in discord using the discord ID below: \n\n" + discordNickname
+                    "You can connect with this user in discord using the discord ID below: \n\n" +
+                      discordNickname
                   )
                 }
                 className=" w-full py-3 px-4 bg-violet-500 hover:bg-violet-600 text-white rounded flex items-center justify-center gap-3"
