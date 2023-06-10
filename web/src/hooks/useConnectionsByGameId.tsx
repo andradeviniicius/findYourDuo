@@ -5,9 +5,8 @@ import {
   createClient,
 } from "@supabase/supabase-js";
 
-const supabaseUrl = "https://qoqcgdkpljrvdqlmasrs.supabase.co"; // Replace with your Supabase URL
-const supabaseKey =
-  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InFvcWNnZGtwbGpydmRxbG1hc3JzIiwicm9sZSI6ImFub24iLCJpYXQiOjE2ODU5MjY1MTMsImV4cCI6MjAwMTUwMjUxM30.TSerFoUzIeistt0zuikV2mpsGWHhA7XgnXvfrlINrk0"; // Replace with your Supabase API key
+const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!;
+const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_KEY!;
 
 interface Connection {
   connectionid: number;
@@ -21,11 +20,11 @@ interface Connection {
 }
 
 export const supabase = createClient(supabaseUrl, supabaseKey);
+
 const useConnectionsByGameId = (gameId: string) => {
   const [connections, setConnections] = useState<{ [x: string]: any }[]>([]);
 
   useEffect(() => {
-
     const fetchConnections = async () => {
       try {
         const { data, error } = await supabase
