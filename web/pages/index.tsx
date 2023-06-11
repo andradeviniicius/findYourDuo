@@ -2,7 +2,7 @@ import { MainTitle, CreateGame, GameList, Spinner } from "../src/components";
 import removeSpinner from "../src/utils/removeSpinner";
 
 export async function getServerSideProps() {
-  const res = await fetch("https://api.twitch.tv/helix/games/top", {
+  const res = await fetch("https://api.twitch.tv/helix/games/top?first=23", {
     headers: {
       Authorization: `Bearer ${process.env.TWITCH_ACCESS_TOKEN}`,
       "Client-Id": `${process.env.TWITCH_CLIENT_ID}`,
