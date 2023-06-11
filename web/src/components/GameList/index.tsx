@@ -43,6 +43,7 @@ export default function GameList({ twitchTopGames }: Props) {
               />
             );
           })
+          .sort((a: any, b: any) => b.props.adsCount - a.props.adsCount)
       ) : (
         <Spinner />
       )}
