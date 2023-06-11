@@ -35,7 +35,7 @@ export default function GameList({ twitchTopGames }: Props) {
 
   return (
     <Carousel>
-      {twitchTopGamesAdsCount ? (
+      {twitchTopGamesAdsCount.length > 0 ? (
         twitchTopGamesAdsCount
           .filter((item: any) => !blockedIds.includes(item.id))
           .sort((a: any, b: any) => b.adsCount - a.adsCount)
