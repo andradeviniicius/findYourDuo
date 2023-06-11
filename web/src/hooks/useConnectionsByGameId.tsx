@@ -23,7 +23,7 @@ export const supabase = createClient(supabaseUrl, supabaseKey);
 
 const useConnectionsByGameId = (gameId: string) => {
   const [connections, setConnections] = useState<{ [x: string]: any }[]>([]);
-
+  
   useEffect(() => {
     const fetchConnections = async () => {
       try {

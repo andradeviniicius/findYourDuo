@@ -8,8 +8,8 @@ import ErrorMessage from "../ErrorMessage";
 import { ChangeEvent } from "react";
 import turnWeekdayIntoId from "../../utils/turnWeekdayIntoId";
 import useInsertNewConnection from "../../hooks/useInsertNewConnection";
-import getFullDayName from "../../utils/getFulldayName";
-import { useRouter } from 'next/router'
+import getFullDayName from "../../utils/getFullDayName";
+import { useRouter } from "next/router";
 
 export type Connection = {
   connectionid: number;
@@ -19,13 +19,13 @@ export type Connection = {
   starthour: string;
   endhour: string;
   isvoicecall: boolean;
-  gameid: number;
+  gameid: string;
   discordnickname: string;
 };
 
 export default function PostAdForm() {
-const router = useRouter()
-const dispatch = useAppDispatch();
+  const router = useRouter();
+  const dispatch = useAppDispatch();
   const validationSchema = yup.object({
     connectionid: yup.string(),
     gameid: yup
@@ -80,10 +80,15 @@ const dispatch = useAppDispatch();
 
   const onSubmit: SubmitHandler<Connection> = (data) => {
     useInsertNewConnection(data);
-    router.push(`/games/${data.gameid}`)
+
+    if (router.query.gameId === data.gameid ) {
+      router.reload();
+    } else {
+      router.push(`/games/${data.gameid}`);
+    }
+
     dispatch(closeModal());
   };
-  console.log(watch());
 
   const handleWeekdayCheckbox = (e: ChangeEvent<HTMLInputElement>) => {
     const dayOfWeek = e.target.id.replace("weekday-", "");
