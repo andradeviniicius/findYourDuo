@@ -1,5 +1,6 @@
 import { Carousel, GameCard, Spinner } from "../../components";
 import useGamesWithConnections from "../../hooks/useGamesWithConnections";
+import DefaultSpinner from "../Spinner/DefaultLoader";
 type Props = {
   twitchTopGames?: any;
 };
@@ -34,25 +35,29 @@ export default function GameList({ twitchTopGames }: Props) {
   });
 
   return (
-    <Carousel>
+    <>
       {twitchTopGamesAdsCount.length != 0 ? (
-        twitchTopGamesAdsCount
-          .filter((item: any) => !blockedIds.includes(item.id))
-          .sort((a: any, b: any) => b.adsCount - a.adsCount)
-          .map((el: any, index: any) => {
-            return (
-              <GameCard
-                gameBanner={el.box_art_url}
-                gameTitle={el.name}
-                gameId={el.id}
-                adsCount={el.adsCount}
-                key={index}
-              />
-            );
-          })
+        <Carousel>
+          {twitchTopGamesAdsCount
+            .filter((item: any) => !blockedIds.includes(item.id))
+            .sort((a: any, b: any) => b.adsCount - a.adsCount)
+            .map((el: any, index: any) => {
+              return (
+                <GameCard
+                  gameBanner={el.box_art_url}
+                  gameTitle={el.name}
+                  gameId={el.id}
+                  adsCount={el.adsCount}
+                  key={index}
+                />
+              );
+            })}
+        </Carousel>
       ) : (
-        <Spinner />
+        <div className="flex justify-center my-10">
+          <DefaultSpinner />
+        </div>
       )}
-    </Carousel>
+    </>
   );
 }

@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import React from "react";
 
-const Spinner = ({ children }: any) => {
+const GlobalSpinner = ({ children }: any) => {
   return (
     <>
       <motion.div
@@ -27,4 +27,4 @@ const Spinner = ({ children }: any) => {
     </>
   );
 };
-export default Spinner;
+export default GlobalSpinner;

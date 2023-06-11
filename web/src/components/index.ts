@@ -5,4 +5,4 @@ export { default as CreateGame } from "./CreateGame";
 export { default as CreateAdForm } from "./CreateAdForm";
 export { default as Carousel } from "./Carousel";
 export { default as AdCard } from "./AdCard";
-export { default as Spinner } from "./Spinner";
+export { default as GlobalSpinner } from "./Spinner/GlobalSpinner";

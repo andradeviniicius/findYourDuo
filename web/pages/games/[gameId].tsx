@@ -1,8 +1,12 @@
 import { useRouter } from "next/router";
 import { ArrowLeft } from "phosphor-react";
-import { Carousel, AdCard, Spinner, CreateGame } from "../../src/components";
+import {
+  Carousel,
+  AdCard,
+  CreateGame,
+  GlobalSpinner,
+} from "../../src/components";
 import removeSpinner from "../../src/utils/removeSpinner";
-import { fakeAds } from "../../helpers/fakeData";
 import { GetServerSidePropsContext, PreviewData } from "next";
 import { ParsedUrlQuery } from "querystring";
 import useConnectionsByGameId from "../../src/hooks/useConnectionsByGameId";
@@ -78,7 +82,7 @@ export default function GameAdsPage(props: {
 
   return (
     <>
-      <Spinner>
+      <GlobalSpinner>
         {/* Use IGDB API To get game info */}
         <div className="grid grid-cols-[20%_60%_20%] md:grid-cols-3 items-center mt-12">
           <button
@@ -125,7 +129,7 @@ export default function GameAdsPage(props: {
             </Carousel>
           )}
         </div>
-      </Spinner>
+      </GlobalSpinner>
       {removeSpinner()}
     </>
   );
