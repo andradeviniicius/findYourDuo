@@ -9,7 +9,7 @@ function MyApp({ Component, pageProps }: AppProps) {
   return (
     <Provider store={store}>
       <Head>
-        <title>NLW eSportss</title>
+        <title>Contact: viniciusdandrade01@gmail.com</title>
       </Head>
       <Component {...pageProps} />
     </Provider>
