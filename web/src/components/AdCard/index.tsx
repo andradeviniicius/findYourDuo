@@ -1,5 +1,6 @@
 import { GameController } from "phosphor-react";
 import getPortugueseDayOfWeek from "../../utils/getPortugueseDayOfWeek";
+import isConnectionOnline from "../../utils/isConnectionOnline";
 
 import { motion } from "framer-motion";
 
@@ -30,12 +31,24 @@ export default function AdCard({
         <div className="w-72 h-fit mx-auto ">
           <div className="border-0 rounded-lg relative flex flex-col w-auto bg-[#2A2634] outline-none focus:outline-none">
             <div className="flex items-start justify-center flex-col py-5 px-5">
-              <label className="mb-1 font-light" htmlFor="userName">
-                Nome
-              </label>
-              <p className="mb-4 font-bold" id="userName">
-                {userName}
-              </p>
+              <div className="flex flex-row justify-between w-full">
+                <div className="flex-col">
+                  <label className="mb-1 font-light" htmlFor="userName">
+                    Nome
+                  </label>
+                  <p className="mb-4 font-bold" id="userName">
+                    {userName}
+                  </p>
+                </div>
+
+                <p>
+                  {isConnectionOnline(hourStart, hourEnd, daysOfWeek) ? (
+                    <p className="text-green-500">Online</p>
+                  ) : (
+                    <p className="text-red">Offline</p>
+                  )}
+                </p>
+              </div>
 
               <label className="mb-1 font-light" htmlFor="timePlaying">
                 Tempo de jogo
@@ -72,13 +85,14 @@ export default function AdCard({
 
               <button
                 type="button"
+                disabled={!isConnectionOnline(hourStart, hourEnd, daysOfWeek)}
                 onClick={() =>
                   window.alert(
                     "You can connect with this user in discord using the discord ID below: \n\n" +
                       discordNickname
                   )
                 }
-                className=" w-full py-3 px-4 bg-violet-500 hover:bg-violet-600 text-white rounded flex items-center justify-center gap-3"
+                className="disabled:opacity-50 disabled:cursor-not-allowed  w-full py-3 px-4 bg-violet-500 hover:bg-violet-600 text-white rounded flex items-center justify-center gap-3"
               >
                 <GameController size={24} />
                 Conectar
