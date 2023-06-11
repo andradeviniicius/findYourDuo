@@ -1,4 +1,5 @@
 import { Carousel, GameCard, Spinner } from "../../components";
+import useGamesWithConnections from "../../hooks/useGamesWithConnections";
 type Props = {
   twitchTopGames?: any;
 };
@@ -16,21 +17,32 @@ export default function GameList({ twitchTopGames }: Props) {
       </div>
     );
   }
+  const allGameConnections = useGamesWithConnections();
 
   return (
     <Carousel>
       {twitchTopGames.data ? (
-        twitchTopGames.data.map((el: any, index: any) => {
-          return (
-            <GameCard
-              gameBanner={el.box_art_url}
-              gameTitle={el.name}
-              gameId={el.id}
-              // adsCount={"1"}
-              key={index}
-            />
-          );
-        })
+        twitchTopGames.data
+          .filter((item: any) => item.id !== "509658")
+          .map((el: any, index: any) => {
+            let gameIdCounts = 0;
+
+            allGameConnections.forEach((game) => {
+              if (game.gameid.toString() === el.id) {
+                gameIdCounts++;
+              }
+            });
+
+            return (
+              <GameCard
+                gameBanner={el.box_art_url}
+                gameTitle={el.name}
+                gameId={el.id}
+                adsCount={gameIdCounts}
+                key={index}
+              />
+            );
+          })
       ) : (
         <Spinner />
       )}

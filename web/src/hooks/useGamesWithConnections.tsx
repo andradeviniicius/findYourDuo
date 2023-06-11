@@ -1,33 +1,31 @@
 import { useEffect, useState } from "react";
 import { supabase } from "../../supabase/supabase";
 
-const useConnectionsByGameId = (gameId: string) => {
+const useGamesWithConnections = () => {
   const [connections, setConnections] = useState<{ [x: string]: any }[]>([]);
 
   useEffect(() => {
-    const fetchConnections = async () => {
+    const fetchGamesAndConnections = async () => {
       try {
-        const { data, error } = await supabase
+        let { data: connections, error } = await supabase
           .from("connections")
-          .select()
-          .eq("gameid", gameId);
+          .select("gameid");
 
         if (error) {
           throw new Error(error.message);
         }
 
-        if (data) {
-          setConnections(data);
+        if (connections) {
+          setConnections(connections);
         }
       } catch (error) {
         console.error("Error fetching connections:", error);
       }
     };
-
-    fetchConnections();
-  }, [gameId]);
+    fetchGamesAndConnections();
+  }, []);
 
   return connections;
 };
 
-export default useConnectionsByGameId;
+export default useGamesWithConnections;
