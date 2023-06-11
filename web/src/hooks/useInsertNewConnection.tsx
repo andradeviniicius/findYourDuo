@@ -1,12 +1,7 @@
-import { createClient } from "@supabase/supabase-js";
 import { Connection } from "../components/CreateAdForm";
+import { supabase } from "../../supabase/supabase";
 
-const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!;
-const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_KEY!;
-
-export const supabase = createClient(supabaseUrl, supabaseKey);
 const useInsertNewConnection = (userForm: Connection) => {
-
   const fetchConnections = async () => {
     try {
       const { data, error } = await supabase.from("connections").insert([

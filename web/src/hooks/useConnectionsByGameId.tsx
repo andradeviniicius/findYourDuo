@@ -1,12 +1,5 @@
 import { useEffect, useState } from "react";
-import {
-  PostgrestResponse,
-  PostgrestSingleResponse,
-  createClient,
-} from "@supabase/supabase-js";
-
-const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!;
-const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_KEY!;
+import { supabase } from "../../supabase/supabase";
 
 interface Connection {
   connectionid: number;
@@ -19,11 +12,9 @@ interface Connection {
   gameid: number;
 }
 
-export const supabase = createClient(supabaseUrl, supabaseKey);
-
 const useConnectionsByGameId = (gameId: string) => {
   const [connections, setConnections] = useState<{ [x: string]: any }[]>([]);
-  
+
   useEffect(() => {
     const fetchConnections = async () => {
       try {
