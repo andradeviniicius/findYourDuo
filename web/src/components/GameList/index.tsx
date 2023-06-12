@@ -38,7 +38,7 @@ export default function GameList({ twitchTopGames }: Props) {
 
   return (
     <>
-      {twitchTopGamesAdsCount.length != 0 ? (
+      {allGameConnections.length != 0 ? (
         <Carousel>
           {twitchTopGamesAdsCount
             .filter((item: any) => !blockedIds.includes(item.id))
