@@ -1,4 +1,4 @@
-import { Carousel, GameCard, Spinner } from "../../components";
+import { Carousel, GameCard } from "../../components";
 import useGamesWithConnections from "../../hooks/useGamesWithConnections";
 import DefaultSpinner from "../Spinner/DefaultLoader";
 type Props = {
