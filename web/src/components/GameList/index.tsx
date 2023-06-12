@@ -22,17 +22,19 @@ export default function GameList({ twitchTopGames }: Props) {
 
   const blockedIds = ["509663", "518203", "509658"];
 
-  const twitchTopGamesAdsCount = twitchTopGames.data.map((el: any) => {
-    let gameIdCounts = 0;
+  const twitchTopGamesAdsCount = twitchTopGames.data
+    .map((el: any) => {
+      let gameIdCounts = 0;
 
-    allGameConnections.forEach((game) => {
-      if (game.gameid.toString() === el.id) {
-        gameIdCounts++;
-      }
-    });
+      allGameConnections.forEach((game) => {
+        if (game.gameid.toString() === el.id) {
+          gameIdCounts++;
+        }
+      });
 
-    return { ...el, adsCount: gameIdCounts };
-  });
+      return { ...el, adsCount: gameIdCounts };
+    })
+    .sort((a: any, b: any) => b.adsCount - a.adsCount);
 
   return (
     <>
@@ -40,7 +42,6 @@ export default function GameList({ twitchTopGames }: Props) {
         <Carousel>
           {twitchTopGamesAdsCount
             .filter((item: any) => !blockedIds.includes(item.id))
-            .sort((a: any, b: any) => b.adsCount - a.adsCount)
             .map((el: any, index: any) => {
               return (
                 <GameCard
