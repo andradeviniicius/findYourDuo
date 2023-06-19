@@ -47,14 +47,14 @@ In development, any contribution will be welcome :)
 | React Native      | 🚧 React Native      |
 | TailwindCSS       | ✅ TailwindCSS       |
 | Prisma            | 🚧 Radix             |
-| SQLite            | 🚧 React-hook-form   |
-| TypeScript        | ✅ TypeScript        |
+| SQLite            | ✅ React-hook-form   |
+|                   | ✅ TypeScript        |
 |                   | ✅ Prisma            |
 |                   | ❌ SQLite            |
-|                   | 🚧 MongoDB           |
+|                   | ✅ Supabase           |
 |                   | ✅ NextJS            |
 |                   | ✅ Redux RTK         |
-|                   | 🚧 Twitch API        |
+|                   | ✅ Twitch API        |
 |                   | 🚧 IGDB API          |
 
 
