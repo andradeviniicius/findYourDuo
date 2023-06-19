@@ -17,19 +17,6 @@ export default function GameCard({
 }: Props) {
   const router = useRouter();
   return (
-    <motion.div
-      initial={"hidden"}
-      animate={"visible"}
-      variants={{
-        hidden: {
-          opacity: 0,
-        },
-        visible: {
-          opacity: 1,
-        },
-      }}
-      transition={{ delay: .7 }}
-    >
       <div className="carousel-item text-center relative w-[180] h-48 snap-start hover:cursor-pointer hover:scale-105 transition ease-in-out">
         <a
           onClick={() => router.push(`/games/${gameId}`)}
@@ -56,7 +43,6 @@ export default function GameCard({
           </div>
         </a>
       </div>
-    </motion.div>
   );
 }
 1;
