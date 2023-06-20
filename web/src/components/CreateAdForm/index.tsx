@@ -63,8 +63,12 @@ export default function PostAdForm() {
       .matches(/^.{3,32}#[0-9]{4}$/, "Favor seguir este formato: exemplo#1234")
       .required("Field is required"),
     daysofweek: yup.array().of(yup.string()),
-    starthour: yup.string().required("Campo obrigatório"),
-    endhour: yup.string().required("Campo obrigatório"),
+    starthour: yup
+      .string()
+      .required("Acho que você esqueceu do horário em que começa a jogar"),
+    endhour: yup
+      .string()
+      .required("Acho que você esqueceu do horário em que para de jogar"),
     isvoicecall: yup.boolean().required("Campo obrigatório"),
   });
 
@@ -81,7 +85,7 @@ export default function PostAdForm() {
   const onSubmit: SubmitHandler<Connection> = (data) => {
     useInsertNewConnection(data);
 
-    if (router.query.gameId === data.gameid ) {
+    if (router.query.gameId === data.gameid) {
       router.reload();
     } else {
       router.push(`/games/${data.gameid}`);
@@ -182,7 +186,7 @@ export default function PostAdForm() {
             <ErrorMessage>{errors.playername?.message}</ErrorMessage>
           </div>
 
-          <div className="w-full flex gap-6">
+          <div className="w-full flex gap-6 md:flex-row flex-col	">
             <div className="w-full flex flex-col justify-start gap-2 mb-4">
               <label htmlFor="defaultInput" className="font-semibold leading-7">
                 Quantas horas de jogo?
@@ -293,8 +297,14 @@ export default function PostAdForm() {
             />
           </div>
           <div className="flex">
-            <ErrorMessage>{errors.starthour?.message}</ErrorMessage>
-            <ErrorMessage>{errors.endhour?.message}</ErrorMessage>
+            {errors.starthour?.message && errors.endhour?.message ? (
+              <ErrorMessage>Favor especifique o horario em que você normalmente joga</ErrorMessage>
+            ) : (
+              <>
+                <ErrorMessage>{errors.starthour?.message}</ErrorMessage>
+                <ErrorMessage>{errors.endhour?.message}</ErrorMessage>
+              </>
+            )}
           </div>
 
           <div className="flex">
