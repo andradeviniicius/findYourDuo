@@ -7,6 +7,7 @@ import { store } from "../src/app/store";
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
+    
     <Provider store={store}>
       <Head>
         <title>Contact: viniciusdandrade01@gmail.com</title>
