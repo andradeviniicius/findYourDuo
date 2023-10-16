@@ -21,9 +21,10 @@ export type Connection = {
   isvoicecall: boolean;
   gameid: string;
   discordnickname: string;
+  twitchTopGames: any;
 };
 
-export default function PostAdForm() {
+export default function PostAdForm({ twitchTopGames }: any) {
   const router = useRouter();
   const dispatch = useAppDispatch();
   const validationSchema = yup.object({
@@ -106,6 +107,8 @@ export default function PostAdForm() {
     }
   };
 
+  console.log(twitchTopGames);
+
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
@@ -149,26 +152,11 @@ export default function PostAdForm() {
               {...register("gameid")}
             >
               <option value="1">Selecione o game que deseja jogar</option>
-              <option value="515024"> Diablo IV</option>
-              <option value="509658"> Just Chatting</option>
-              <option value="32982"> Grand Theft Auto V</option>
-              <option value="55453844"> Street Fighter 6</option>
-              <option value="516575"> VALORANT</option>
-              <option value="21779"> League of Legends</option>
-              <option value="27471"> Minecraft</option>
-              <option value="213930085"> Honkai: Star Rail</option>
-              <option value="511224"> Apex Legends</option>
-              <option value="1767487238"> Casino Slot Machine</option>
-              <option value="518203"> Sports</option>
-              <option value="33214"> Fortnite</option>
-              <option value="18122"> World of Warcraft</option>
-              <option value="512710"> Call of Duty: Warzone</option>
-              <option value="32399"> Counter-Strike: Global Offensive</option>
-              <option value="263490"> Rust</option>
-              <option value="491487"> Dead by Daylight</option>
-              <option value="29595"> Dota 2</option>
-              <option value="509659"> ASMR</option>
-              <option value="29452"> Virtual Casino</option>
+              {twitchTopGames
+                .filter((el: any) => el.id !== "509658")
+                .map((el: any) => {
+                  return <option>{el.name}</option>;
+                })}
             </select>
             <ErrorMessage>{errors.gameid?.message}</ErrorMessage>
           </div>
@@ -298,7 +286,9 @@ export default function PostAdForm() {
           </div>
           <div className="flex">
             {errors.starthour?.message && errors.endhour?.message ? (
-              <ErrorMessage>Favor especifique o horario em que você normalmente joga</ErrorMessage>
+              <ErrorMessage>
+                Favor especifique o horario em que você normalmente joga
+              </ErrorMessage>
             ) : (
               <>
                 <ErrorMessage>{errors.starthour?.message}</ErrorMessage>

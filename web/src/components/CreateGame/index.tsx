@@ -6,9 +6,16 @@ import { openModal, closeModal } from "../../features/modal/createAdModalSlice";
 type Props = {
   mainMessage?: string;
   subMessage?: string;
+  twitchTopGames?: any;
 };
 
-export default function CreateGame({ mainMessage, subMessage }: Props) {
+export default function CreateGame({
+  mainMessage,
+  subMessage,
+  twitchTopGames,
+}: Props) {
+  console.log(twitchTopGames);
+  
   const isModalOpen = useAppSelector((state) => state.modal.active);
   const dispatch = useAppDispatch();
 
@@ -37,7 +44,7 @@ export default function CreateGame({ mainMessage, subMessage }: Props) {
 
         {isModalOpen ? (
           <>
-            <CreateAdForm />
+            <CreateAdForm twitchTopGames={twitchTopGames.data} />
             {/* Background */}
             <div className="opacity-50 fixed inset-0 z-40 bg-black"></div>
           </>

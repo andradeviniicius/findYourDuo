@@ -25,7 +25,7 @@ const Home = (props: any) => {
         <div className="flex flex-col 2xl:container 2xl:mx-auto 2xl:px-0 py-3">
           <MainTitle />
           <GameList twitchTopGames={props.data} />
-          <CreateGame />
+          <CreateGame twitchTopGames={props.data} />
         </div>
       </GlobalSpinner>
       {removeSpinner()}
