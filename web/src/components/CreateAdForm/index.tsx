@@ -34,26 +34,29 @@ export default function PostAdForm({ twitchTopGames }: any) {
       .required()
       .oneOf(
         [
-          "515024",
-          "509658",
-          "32982",
-          "55453844",
-          "516575",
-          "21779",
-          "27471",
-          "213930085",
-          "511224",
-          "1767487238",
-          "518203",
-          "33214",
-          "18122",
-          "512710",
-          "32399",
-          "263490",
-          "491487",
           "29595",
-          "509659",
-          "29452",
+          "509658",
+          "27471",
+          "34134",
+          "21779",
+          "32982",
+          "32399",
+          "1074044196",
+          "516575",
+          "33214",
+          "687129551",
+          "599619814",
+          "143106037",
+          "18122",
+          "509663",
+          "735904419",
+          "26936",
+          "515025",
+          "511224",
+          "1910103699",
+          "30921",
+          "460630",
+          "498566",
         ],
         "Selecione pelo menos um item da lista "
       ),
@@ -107,7 +110,11 @@ export default function PostAdForm({ twitchTopGames }: any) {
     }
   };
 
-  console.log(twitchTopGames);
+  twitchTopGames.forEach((element) => {
+    // console.log(element.id);
+  });
+
+  console.log(watch());
 
   return (
     <form
@@ -155,7 +162,7 @@ export default function PostAdForm({ twitchTopGames }: any) {
               {twitchTopGames
                 .filter((el: any) => el.id !== "509658")
                 .map((el: any) => {
-                  return <option>{el.name}</option>;
+                  return <option value={el.id}>{el.name}</option>;
                 })}
             </select>
             <ErrorMessage>{errors.gameid?.message}</ErrorMessage>
@@ -308,7 +315,7 @@ export default function PostAdForm({ twitchTopGames }: any) {
               />
               <label
                 htmlFor="inline-checkbox"
-                className="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+                className="ml-2 text-sm font-medium dark:text-gray-300 text-white"
               >
                 Costumo me conectar ao chat de voz
               </label>
