@@ -10,25 +10,8 @@ import removeSpinner from "../../src/utils/removeSpinner";
 import { GetServerSidePropsContext, PreviewData } from "next";
 import { ParsedUrlQuery } from "querystring";
 import useConnectionsByGameId from "../../src/hooks/useConnectionsByGameId";
+import { TwitchError, TwitchGamesResponse, TwitchGame } from "./types";
 
-interface TwitchGame {
-  id: string;
-  name: string;
-  box_art_url: string;
-}
-interface TwitchError {
-  error?: string;
-  status?: number;
-  message?: string;
-  data?: TwitchGame[];
-}
-interface TwitchGamesResponse {
-  error?: string;
-  data: TwitchGame[];
-  pagination: {
-    cursor: string;
-  };
-}
 export const getServerSideProps = async (
   context: GetServerSidePropsContext<ParsedUrlQuery, PreviewData>
 ) => {
@@ -39,8 +22,12 @@ export const getServerSideProps = async (
       Authorization: `Bearer ${process.env.TWITCH_ACCESS_TOKEN}`,
       "Client-Id": `${process.env.TWITCH_CLIENT_ID}`,
     },
+  }).catch((e) => {
+    console.log("error", e);
   });
+  
   const data = await res.json();
+  console.log("data", data);
 
   return { props: { data } };
 };
@@ -51,6 +38,8 @@ export default function GameAdsPage(props: {
   const router = useRouter();
 
   const allGameConnections = useConnectionsByGameId(props.data.data![0].id);
+
+  console.log(props.data.data);
 
   if (props.data.data?.length! <= 0) {
     return (
