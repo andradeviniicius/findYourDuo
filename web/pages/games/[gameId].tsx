@@ -39,8 +39,6 @@ export default function GameAdsPage(props: {
 
   const allGameConnections = useConnectionsByGameId(props.data.data![0].id);
 
-  console.log(props.data.data);
-
   if (props.data.data?.length! <= 0) {
     return (
       <>

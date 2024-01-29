@@ -111,10 +111,7 @@ export default function PostAdForm({ twitchTopGames }: any) {
   };
 
   twitchTopGames.forEach((element) => {
-    // console.log(element.id);
   });
-
-  console.log(watch());
 
   return (
     <form

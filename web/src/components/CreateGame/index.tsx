@@ -14,7 +14,6 @@ export default function CreateGame({
   subMessage,
   twitchTopGames,
 }: Props) {
-  console.log(twitchTopGames);
   
   const isModalOpen = useAppSelector((state) => state.modal.active);
   const dispatch = useAppDispatch();
