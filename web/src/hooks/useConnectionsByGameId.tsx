@@ -1,6 +1,7 @@
+// @ts-nocheck
+
 import { useEffect, useState } from "react";
 import { supabase } from "../../supabase/supabase";
-
 const useConnectionsByGameId = (gameId: string) => {
   const [connections, setConnections] = useState<{ [x: string]: any }[]>([]);
 

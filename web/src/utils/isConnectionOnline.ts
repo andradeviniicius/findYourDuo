@@ -3,7 +3,7 @@ import transformDayOfWeekInWords from "./transformDayOfWeekInWords";
 export default function isConnectionOnline(
   starthour: string,
   endhour: string,
-  daysOfWeek: any[]
+  daysOfWeek: string[]
 ) {
   const currentTime = new Date();
   const currentDay = transformDayOfWeekInWords(currentTime.getDay());
@@ -13,7 +13,7 @@ export default function isConnectionOnline(
 
   if (currentHour < userStartHour || currentHour > userEndHour) {
     return false;
-  } else if (daysOfWeek.some((item: any) => item === currentDay)) {
+  } else if (daysOfWeek.some((item: string) => item === currentDay)) {
     return true;
   }
 }

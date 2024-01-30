@@ -22,10 +22,15 @@ export type Connection = {
   isvoicecall: boolean;
   gameid: string;
   discordnickname: string;
-  twitchTopGames: any;
+  twitchTopGames: TwitchGame;
 };
 
-export default function CreateAdForm(twitchTopGames: TwitchGame[]) {
+type Props = {
+  twitchTopGames: TwitchGame[];
+};
+export default function CreateAdForm({ twitchTopGames }: Props) {
+  console.log("tw topgames", twitchTopGames);
+
   const router = useRouter();
   const dispatch = useAppDispatch();
   const validationSchema = yup.object({
@@ -111,8 +116,6 @@ export default function CreateAdForm(twitchTopGames: TwitchGame[]) {
     }
   };
 
-  twitchTopGames.forEach((element) => {});
-
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
@@ -157,8 +160,8 @@ export default function CreateAdForm(twitchTopGames: TwitchGame[]) {
             >
               <option value="1">Selecione o game que deseja jogar</option>
               {twitchTopGames
-                .filter((el: any) => el.id !== "509658")
-                .map((el: any) => {
+                .filter((el: TwitchGame) => el.id !== "509658")
+                .map((el: TwitchGame) => {
                   return <option value={el.id}>{el.name}</option>;
                 })}
             </select>

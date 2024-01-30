@@ -5,7 +5,7 @@ import { useRouter } from "next/router";
 type Props = {
   gameBanner: string;
   gameTitle: string;
-  gameId: any;
+  gameId: string;
   adsCount?: number;
 };
 

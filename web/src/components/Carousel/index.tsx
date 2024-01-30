@@ -1,6 +1,24 @@
+import React, { ReactElement, ReactPortal } from "react";
 import { useState, useRef, useEffect } from "react";
 
-export default function Carousel({ children }: any) {
+type ReactText = string | number;
+type ReactChild = ReactElement | ReactText;
+
+interface ReactNodeArray extends Array<ReactNode> {}
+type ReactFragment = {} | ReactNodeArray;
+type ReactNode =
+  | ReactChild
+  | ReactFragment
+  | ReactPortal
+  | boolean
+  | null
+  | undefined;
+
+type Props = {
+  children: ReactNode;
+};
+
+export default function Carousel({ children }: Props) {
   const maxScrollWidth = useRef(0);
   const [currentIndex, setCurrentIndex] = useState(0);
   const carousel = useRef<HTMLDivElement>(null);
@@ -20,7 +38,7 @@ export default function Carousel({ children }: any) {
     }
   };
 
-  const isDisabled = (direction: any) => {
+  const isDisabled = (direction: string) => {
     if (direction === "prev") {
       return currentIndex <= 0;
     }

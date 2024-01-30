@@ -2,11 +2,12 @@ import { MagnifyingGlassPlus } from "phosphor-react";
 import { CreateAdForm } from "../../components";
 import { useAppSelector, useAppDispatch } from "../../app/hooks";
 import { openModal, closeModal } from "../../features/modal/createAdModalSlice";
+import { TwitchGame } from "../../../pages/games/types";
 
 type Props = {
   mainMessage?: string;
   subMessage?: string;
-  twitchTopGames?: any;
+  twitchTopGames: TwitchGame[];
 };
 
 export default function CreateGame({
@@ -14,7 +15,6 @@ export default function CreateGame({
   subMessage,
   twitchTopGames,
 }: Props) {
-  
   const isModalOpen = useAppSelector((state) => state.modal.active);
   const dispatch = useAppDispatch();
 

@@ -15,4 +15,5 @@ export interface TwitchGamesResponse {
   pagination: {
     cursor: string;
   };
+  message?: string;
 }

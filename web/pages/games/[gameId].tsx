@@ -30,11 +30,11 @@ export const getServerSideProps = async (
 
 export default function GameAdsPage(props: {
   gameData: TwitchGamesResponse | TwitchError;
-  topGames: any;
+  topGames: TwitchGamesResponse;
 }) {
   const router = useRouter();
 
-  console.log(props);
+  console.log("log gameid", props.topGames.data);
 
   const allGameConnections = useConnectionsByGameId(props.gameData.data![0].id);
 
