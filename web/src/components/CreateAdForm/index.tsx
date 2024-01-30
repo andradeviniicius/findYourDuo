@@ -10,6 +10,7 @@ import turnWeekdayIntoId from "../../utils/turnWeekdayIntoId";
 import useInsertNewConnection from "../../hooks/useInsertNewConnection";
 import getFullDayName from "../../utils/getFullDayName";
 import { useRouter } from "next/router";
+import { TwitchGame, TwitchGamesResponse } from "../../../pages/games/types";
 
 export type Connection = {
   connectionid: number;
@@ -24,7 +25,7 @@ export type Connection = {
   twitchTopGames: any;
 };
 
-export default function PostAdForm({ twitchTopGames }: any) {
+export default function CreateAdForm(twitchTopGames: TwitchGame[]) {
   const router = useRouter();
   const dispatch = useAppDispatch();
   const validationSchema = yup.object({
@@ -110,8 +111,7 @@ export default function PostAdForm({ twitchTopGames }: any) {
     }
   };
 
-  twitchTopGames.forEach((element) => {
-  });
+  twitchTopGames.forEach((element) => {});
 
   return (
     <form
