@@ -1,3 +1,4 @@
+import { Helper } from "../helpers";
 import {
   MainTitle,
   CreateGame,
@@ -7,15 +8,35 @@ import {
 import removeSpinner from "../src/utils/removeSpinner";
 
 export async function getServerSideProps() {
-  const res = await fetch("https://api.twitch.tv/helix/games/top?first=23", {
-    headers: {
-      Authorization: `Bearer ${process.env.TWITCH_ACCESS_TOKEN}`,
-      "Client-Id": `${process.env.TWITCH_CLIENT_ID}`,
-    },
-  });
-  const data = await res.json();
+  function calculateExpirationDate(seconds) {
+    let currentDate = new Date();
+    let expirationDate = new Date(currentDate.getTime() + seconds * 1000);
 
-  return { props: { data } };
+    return expirationDate;
+  }
+
+  console.log(calculateExpirationDate(5632790));
+
+  const currentAccessToken = await Helper.grabAccessToken();
+  const validate = await Helper.validateAccessToken(
+    currentAccessToken.accessToken
+  );
+  console.log(validate);
+
+  let accessTokenExpiracy = new Date(
+    calculateExpirationDate(validate.expires_in)
+  );
+  let currentDate = new Date();
+
+  if (accessTokenExpiracy.getTime() > currentDate.getTime()) {
+    console.log("data de expiracao é futuro");
+  } else {
+    console.log("data de expiracao é passado");
+  }
+
+  const topGames = await Helper.getTopGames(currentAccessToken.accessToken);
+
+  return { props: { topGames } };
 }
 
 const Home = (props: any) => {
@@ -24,8 +45,8 @@ const Home = (props: any) => {
       <GlobalSpinner>
         <div className="flex flex-col 2xl:container 2xl:mx-auto 2xl:px-0 py-3">
           <MainTitle />
-          <GameList twitchTopGames={props.data} />
-          <CreateGame twitchTopGames={props.data} />
+          <GameList twitchTopGames={props.topGames} />
+          <CreateGame twitchTopGames={props.topGames} />
         </div>
       </GlobalSpinner>
       {removeSpinner()}

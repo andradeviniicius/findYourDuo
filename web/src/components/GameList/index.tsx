@@ -1,11 +1,13 @@
 import { Carousel, GameCard } from "../../components";
 import useGamesWithConnections from "../../hooks/useGamesWithConnections";
 import DefaultSpinner from "../Spinner/DefaultLoader";
+
 type Props = {
   twitchTopGames?: any;
 };
 
 export default function GameList({ twitchTopGames }: Props) {
+
   if (twitchTopGames.message) {
     return (
       <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative my-10">
