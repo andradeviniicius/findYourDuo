@@ -11,34 +11,32 @@ import { GetServerSidePropsContext, PreviewData } from "next";
 import { ParsedUrlQuery } from "querystring";
 import useConnectionsByGameId from "../../src/hooks/useConnectionsByGameId";
 import { TwitchError, TwitchGamesResponse, TwitchGame } from "./types";
+import { Helper } from "../../helpers";
 
 export const getServerSideProps = async (
   context: GetServerSidePropsContext<ParsedUrlQuery, PreviewData>
 ) => {
   const gameId = context.query.gameId;
 
-  const res = await fetch("https://api.twitch.tv/helix/games?id=" + gameId, {
-    headers: {
-      Authorization: `Bearer ${process.env.TWITCH_ACCESS_TOKEN}`,
-      "Client-Id": `${process.env.TWITCH_CLIENT_ID}`,
-    },
-  }).catch((e) => {
-    console.log("error", e);
-  });
+  const currentAccessToken = await Helper.grabAccessToken();
+  const gameData = await Helper.getSpecificGame(
+    currentAccessToken.accessToken,
+    gameId
+  );
 
-  const data = await res.json();
-
-  return { props: { data } };
+  return { props: { gameData } };
 };
 
 export default function GameAdsPage(props: {
-  data: TwitchGamesResponse | TwitchError;
+  gameData: TwitchGamesResponse | TwitchError;
 }) {
   const router = useRouter();
 
-  const allGameConnections = useConnectionsByGameId(props.data.data![0].id);
+  console.log("data", props.gameData.data);
 
-  if (props.data.data?.length! <= 0) {
+  const allGameConnections = useConnectionsByGameId(props.gameData.data![0].id);
+
+  if (props.gameData.data?.length! <= 0) {
     return (
       <>
         <div className="grid grid-cols-[20%_60%_20%] md:grid-cols-3 items-center mt-12">
@@ -54,7 +52,7 @@ export default function GameAdsPage(props: {
         <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative my-10">
           <strong className="font-bold">Hey user! </strong>
           <span className="block sm:inline">
-            {props.data.error
+            {props.gameData.error
               ? "Something went wrong in the Twitch API, please refresh the page"
               : "This game doesn't exist in Twitch database, please go back"}{" "}
             or contact<strong> viniciusdandrade@gmail.com</strong>
@@ -64,7 +62,7 @@ export default function GameAdsPage(props: {
     );
   }
 
-  const gameName = props.data.data![0].name;
+  const gameName = props.gameData.data![0].name;
 
   return (
     <>

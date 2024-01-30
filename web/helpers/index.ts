@@ -12,6 +12,21 @@ export class Helper {
     return data;
   }
 
+  static async getSpecificGame(
+    accessToken: string,
+    gameId: string | string[] | undefined
+  ) {
+    const res = await fetch("https://api.twitch.tv/helix/games?id=" + gameId, {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+        "Client-Id": `${process.env.TWITCH_CLIENT_ID}`,
+      },
+    });
+
+    const data = await res.json();
+    return data;
+  }
+
   static async setNewAccessToken() {
     let data = await fetch(
       `https://id.twitch.tv/oauth2/token?grant_type=client_credentials&client_secret=${process.env.TWITCH_SECRET}&client_id=${process.env.TWITCH_CLIENT_ID}`,
