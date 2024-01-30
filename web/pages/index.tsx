@@ -32,6 +32,8 @@ export async function getServerSideProps() {
 }
 
 const Home = (props: any) => {
+  console.log(props.topGames);
+
   return (
     <>
       <GlobalSpinner>

@@ -43,7 +43,7 @@ export default function CreateGame({
 
         {isModalOpen ? (
           <>
-            <CreateAdForm twitchTopGames={twitchTopGames.data} />
+            <CreateAdForm twitchTopGames={twitchTopGames} />
             {/* Background */}
             <div className="opacity-50 fixed inset-0 z-40 bg-black"></div>
           </>

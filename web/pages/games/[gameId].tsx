@@ -23,16 +23,18 @@ export const getServerSideProps = async (
     currentAccessToken.accessToken,
     gameId
   );
+  const topGames = await Helper.getTopGames(currentAccessToken.accessToken);
 
-  return { props: { gameData } };
+  return { props: { gameData, topGames } };
 };
 
 export default function GameAdsPage(props: {
   gameData: TwitchGamesResponse | TwitchError;
+  topGames: any;
 }) {
   const router = useRouter();
 
-  console.log("data", props.gameData.data);
+  console.log(props);
 
   const allGameConnections = useConnectionsByGameId(props.gameData.data![0].id);
 
@@ -92,6 +94,7 @@ export default function GameAdsPage(props: {
             <CreateGame
               mainMessage="Ainda não há anúncios para este jogo"
               subMessage='Seja o primeiro clicando no botão de "Publicar anúncio" ao lado!'
+              twitchTopGames={props.topGames.data}
             />
           ) : (
             <Carousel>
