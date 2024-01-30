@@ -12,8 +12,8 @@ export class Helper {
     return data;
   }
 
-  static async getAccessToken() {
-    return await fetch(
+  static async setNewAccessToken() {
+    let data = await fetch(
       `https://id.twitch.tv/oauth2/token?grant_type=client_credentials&client_secret=${process.env.TWITCH_SECRET}&client_id=${process.env.TWITCH_CLIENT_ID}`,
       { method: "POST" }
     )
@@ -24,6 +24,13 @@ export class Helper {
       .catch((err) => {
         console.error(`There was an error: ${err}`);
       });
+
+    const { error, data: accessToken } = await supabase
+      .from("accessToken")
+      .update({ expires_in: data.expires_in, accessToken: data.access_token })
+      .eq("id", 1);
+
+    return data.access_token;
   }
 
   static async validateAccessToken(accessToken: string) {
@@ -46,6 +53,13 @@ export class Helper {
       .from("accessToken")
       .select("*");
 
-    return accessToken[0];
+    return accessToken![0];
+  }
+
+  static calculateExpirationDate(seconds: number) {
+    let currentDate = new Date();
+    let expirationDate = new Date(currentDate.getTime() + seconds * 1000);
+
+    return expirationDate;
   }
 }

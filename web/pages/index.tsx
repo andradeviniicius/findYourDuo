@@ -8,33 +8,25 @@ import {
 import removeSpinner from "../src/utils/removeSpinner";
 
 export async function getServerSideProps() {
-  function calculateExpirationDate(seconds) {
-    let currentDate = new Date();
-    let expirationDate = new Date(currentDate.getTime() + seconds * 1000);
-
-    return expirationDate;
-  }
-
-  console.log(calculateExpirationDate(5632790));
-
   const currentAccessToken = await Helper.grabAccessToken();
   const validate = await Helper.validateAccessToken(
     currentAccessToken.accessToken
   );
-  console.log(validate);
 
   let accessTokenExpiracy = new Date(
-    calculateExpirationDate(validate.expires_in)
+    Helper.calculateExpirationDate(validate.expires_in)
   );
   let currentDate = new Date();
+  let topGames = [];
 
   if (accessTokenExpiracy.getTime() > currentDate.getTime()) {
-    console.log("data de expiracao é futuro");
+    // "token valido"
+    topGames = await Helper.getTopGames(currentAccessToken.accessToken);
   } else {
-    console.log("data de expiracao é passado");
+    // "expirou o token";
+    const newAccessToken = await Helper.setNewAccessToken();
+    topGames = await Helper.getTopGames(newAccessToken);
   }
-
-  const topGames = await Helper.getTopGames(currentAccessToken.accessToken);
 
   return { props: { topGames } };
 }
