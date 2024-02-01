@@ -1,11 +1,7 @@
-import Image from "next/image";
-
 export default function Home() {
   return (
-    <>
-      <header>oi</header>
-      <main>oi</main>
-      <footer>oi</footer>
-    </>
+    <main>
+      <h1>ASDASDASD</h1>
+    </main>
   );
 }
