@@ -12,11 +12,11 @@ export default function AuthLayout({
         <div className="authContainer__left">
           <div className="authContainer__left__container">
             <h1 className="authContainer__left__title">
-              Find your ideal Gaming Partner with PassaNadaDuo
+              Find your ideal Gaming Partner here!
             </h1>
             <Image
               className="authContainer__left__image"
-              src="https://picsum.photos/1920/1080"
+              src="/authContainerBackground.jpg"
               alt=""
               width={1920}
               height={1080}
