@@ -11,6 +11,16 @@ Welcome to Passanada, the platform to find your perfect gaming duo! 🎮 Connect
 - **User Authentication**: Create your account using Google, Riot, Discord, Twitch, or traditional email and password methods.
 - **Connect with Players**: Find and connect with other players on the platform to form gaming duos for an enhanced gaming experience.
 
+## Stacks Used
+
+- **Frontend**: React, Next.js, Framer Motion
+- **State Management**: Redux Toolkit
+- **Form Handling**: React Hook Form, Yup
+- **Database Integration**: Supabase
+- **Authentication**: Supabase, Discord, Google, Twitch, Riot
+- **UI Icons**: Phosphor React
+- **Utility**: UUID
+
 ## Getting Started
 
 ### Prerequisites
@@ -76,6 +86,16 @@ Bem-vindo ao Passanada, a plataforma para encontrar a sua dupla de jogo perfeita
 - Descoberta de jogos**: Explore os principais jogos do Twitch e obtenha informações detalhadas sobre eles a partir da API do IGDB, bem como os jogadores que estão à espera de jogar.
 - Autenticação de usuário**: Crie sua conta usando o Google, Riot, Discord, Twitch ou métodos tradicionais de e-mail e senha.
 - Conectar-se com jogadores**: Encontre outros jogadores na plataforma para formar duos de jogo e ter uma bela experiência de jogo.
+
+## Stacks
+
+- **Frontend**: React, Next.js, Framer Motion
+- **State Management**: Redux Toolkit
+- **Forms**: React Hook Form, Yup
+- **Banco de dados**: Supabase
+- **Autenticação**: Supabase, Discord, Google, Twitch, Riot
+- **Ícones**: Phosphor React
+- **Utilitários**: UUID
 
 ## Como começar
 
