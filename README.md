@@ -64,7 +64,7 @@ Happy gaming! 🎮
 
 </details>
 
-<detalhes>
+<details>
 <summary>README PT-BR</summary>
 
 # Passanada - Encontre a sua dupla
@@ -125,4 +125,4 @@ Sinta-se à vontade para entrar em contacto connosco para quaisquer questões ou
 
 Happy gameplay! 🎮
 
-</detalhes>
+</details>
