@@ -1,0 +1,39 @@
+@import "../variables";
+
+.external_auth {
+  display: flex;
+  gap: 2%;
+
+  &-btn {
+    padding: 1.6rem 4rem 1.6rem 4rem;
+    @media (max-width: 768px) {
+      padding: 1.6rem 2rem 1.6rem 2rem;
+    }
+    cursor: pointer;
+    background-color: $background-color-lighter;
+
+    border-radius: 0.5rem;
+    // Styles for individual social buttons
+
+    &--discord {
+      &:hover {
+        background-color: #7289da;
+      }
+    }
+    &--google {
+      &:hover {
+        background-color: #e40028;
+      }
+    }
+    &--twitch {
+      :hover {
+        background-color: #9146ff;
+      }
+    }
+    &--riot {
+      &:hover {
+        background-color: #e40028;
+      }
+    }
+  }
+}

@@ -1,49 +1,18 @@
 import React from "react";
-import { FaDiscord, FaGoogle, FaTwitch } from "react-icons/fa";
-import { SiRiotgames } from "react-icons/si";
+
 import { MdOutlineEmail } from "react-icons/md";
 import { RiLockPasswordFill } from "react-icons/ri";
 
-import "@/styles/login.scss";
+import "@styles/login.scss";
 import Link from "next/link";
+import ExternalAuth from "@components/ExternalAuth";
 
 export default function LoginPage() {
-  const providers = ["discord", "google", "riot", "twitch"];
-
   return (
     <div className="login">
       <div className="login__logo"></div>
 
-      <div className="login__social">
-        <button
-          className={`login__social-btn login__social-btn--discord`}
-          aria-label={`Login with Discord`}
-          type="button"
-        >
-          <FaDiscord />
-        </button>
-        <button
-          className={`login__social-btn login__social-btn--google`}
-          aria-label={`Login with Google`}
-          type="button"
-        >
-          <FaGoogle />
-        </button>
-        <button
-          className={`login__social-btn login__social-btn--twitch`}
-          aria-label={`Login with Twitch`}
-          type="button"
-        >
-          <FaTwitch />
-        </button>
-        <button
-          className={`login__social-btn login__social-btn--riot`}
-          aria-label={`Login with Riot`}
-          type="button"
-        >
-          <SiRiotgames />
-        </button>
-      </div>
+      <ExternalAuth />
 
       <div className="login__separator">
         <span className="login__separator__line1" />

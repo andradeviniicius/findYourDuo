@@ -1,6 +1,6 @@
 @import "../variables";
 
-.login {
+.signup {
   // Your overall form styles
 
   max-width: 46rem;
@@ -86,8 +86,6 @@
         width: 20%;
       }
 
-      &--email {
-      }
     }
 
     &__forgot {
@@ -97,8 +95,8 @@
       &-text {
         width: 100%;
         text-align: right;
-        font-size: 1.2rem;
-        color: #c50000;
+        font-size: 1rem;
+        color: $border-color;
         cursor: pointer;
       }
     }
