@@ -1,3 +1,4 @@
+"use client";
 import React from "react";
 
 import { MdOutlineEmail } from "react-icons/md";
@@ -6,8 +7,11 @@ import { RiLockPasswordFill } from "react-icons/ri";
 import "@styles/login.scss";
 import Link from "next/link";
 import ExternalAuth from "@components/ExternalAuth";
+import { useRouter } from "next/navigation";
 
 export default function LoginPage() {
+  const router = useRouter();
+
   return (
     <div className="login">
       <div className="login__logo"></div>
@@ -48,7 +52,11 @@ export default function LoginPage() {
           <span className="login-form__forgot-text">Forgot password?</span>
         </div>
 
-        <button type="submit" className="login-form__sign-in-btn">
+        <button
+          type="button"
+          onClick={() => router.push("dashboard")}
+          className="login-form__sign-in-btn"
+        >
           Sign In
         </button>
 
