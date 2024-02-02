@@ -1,10 +1,11 @@
 import React from "react";
-import "./styles.scss";
-import Image from "next/image";
 import { FaDiscord, FaGoogle, FaTwitch } from "react-icons/fa";
 import { SiRiotgames } from "react-icons/si";
 import { MdOutlineEmail } from "react-icons/md";
 import { RiLockPasswordFill } from "react-icons/ri";
+
+import "@/styles/login.scss";
+import Link from "next/link";
 
 export default function LoginPage() {
   const providers = ["discord", "google", "riot", "twitch"];
@@ -84,7 +85,9 @@ export default function LoginPage() {
 
         <div className="login-form__sign-up-text">
           Don't have an account?{" "}
-          <span className="login-form__sign-up-text-content">Sign up</span>
+          <Link href="/signup" className="login-form__sign-up-text-content">
+            Sign up
+          </Link>
         </div>
       </form>
     </div>
